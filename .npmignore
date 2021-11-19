@@ -1,0 +1,10 @@
+.git
+src
+test
+
+.eslintignore
+.eslintrc.json
+.gitignore
+.npmignore
+gulpfile.*
+tsconfig.json
