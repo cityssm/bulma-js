@@ -9,6 +9,15 @@ The unofficial missing JavaScript library for [Bulma](https://bulma.io/) website
 
 ## Getting Started
 
+Download [bulma-js.js](dist/bulma-js.js) here,
+or install from npm.
+
+```sh
+npm install @cityssm/bulma-js
+```
+
+Add the following to your HTML.
+
 ```html
 <script src="dist/bulma-js.js"></script>
 <script>
