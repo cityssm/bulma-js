@@ -16,6 +16,45 @@ The unofficial missing JavaScript library for [Bulma](https://bulma.io/) website
 </script>
 ```
 
+## Options
+
+### Toggle Functionality
+
+```javascript
+bulmaJS.setConfig("bulma.burger", true);
+bulmaJS.setConfig("bulma.dropdown", true);
+bulmaJS.setConfig("dropdown", true);
+bulmaJS.setConfig("window.collapse", true); // close dropdowns when clicked outside
+```
+
+### Set Unique Element Id Prefix
+
+```javascript
+bulmaJS.setConfig("bulmaJS.elementIdPrefix", "bulma-js-");
+```
+
+### Set the "Initialized" Attribute Name
+
+```javascript
+bulmaJS.setConfig("bulmaJS.initAttribute", "data-bulma-js-init");
+```
+
+### Initialize Functionality on Entire Page
+
+Can be called multiple times after page contents have changed.
+
+```javascript
+bulmaJS.init();
+```
+
+### Initialize Functionality on the Children of an Element
+
+Helpful after populating an area with an AJAX call.
+
+```javascript
+bulmaJS.init(document.getElementById("container-element"));
+```
+
 ## Features So Far
 
 -   Toggles appropriate Bulma classes **and ARIA attributes**.

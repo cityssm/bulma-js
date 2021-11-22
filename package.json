@@ -2,7 +2,11 @@
   "name": "@cityssm/bulma-js",
   "version": "0.1.0",
   "description": "The unofficial missing JavaScript library for Bulma websites",
-  "main": "dist/index.min.js",
+  "type": "module",
+  "exports": "dist/bulma-js.js",
+  "engines": {
+    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -14,6 +18,7 @@
     "aria",
     "bulma",
     "dropdown",
+    "navbar",
     "navigation"
   ],
   "author": "The Corporation of the City of Sault Ste. Marie",
@@ -29,8 +34,9 @@
     "@typescript-eslint/parser": "^5.4.0",
     "eslint": "^7.32.0",
     "eslint-plugin-import": "^2.25.3",
-    "eslint-plugin-unicorn": "^38.0.1",
+    "eslint-plugin-unicorn": "^39.0.0",
     "gulp": "^4.0.2",
-    "gulp-minify": "^3.1.0"
+    "gulp-minify": "^3.1.0",
+    "gulp-replace": "^1.1.3"
   }
 }

@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 (() => {
     const config = new Map();
     config.set("bulmaJS.initAttribute", "data-bulma-js-init");
@@ -18,6 +16,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
             keyEvent.currentTarget.click();
         }
     };
+    let window_collapse_init = false;
     const window_collapse = (clickEvent) => {
         const element = clickEvent
             ? clickEvent.target
@@ -161,8 +160,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
         if (config.get("dropdown")) {
             init_dropdown(scopeElement);
         }
-        if (config.get("window.collapse")) {
+        if (config.get("window.collapse") && !window_collapse_init) {
             window.addEventListener("click", window_collapse);
+            window_collapse_init = true;
         }
     };
     const bulmaJS = {
@@ -176,3 +176,4 @@ Object.defineProperty(exports, "__esModule", { value: true });
     };
     window.bulmaJS = bulmaJS;
 })();
+export {};

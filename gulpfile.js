@@ -1,21 +1,18 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const gulp_1 = __importDefault(require("gulp"));
-const gulp_minify_1 = __importDefault(require("gulp-minify"));
+import gulp from "gulp";
+import replace from "gulp-replace";
+import minify from "gulp-minify";
 const sourceMinFunction = () => {
-    return gulp_1.default.src("src/*.js", { allowEmpty: true })
-        .pipe((0, gulp_minify_1.default)({ noSource: true, ext: { min: ".js" } }))
-        .pipe(gulp_1.default.dest("dist"));
+    return gulp.src("src/*.js", { allowEmpty: true })
+        .pipe(replace("export {};", ""))
+        .pipe(minify({ noSource: true, ext: { min: ".js" } }))
+        .pipe(gulp.dest("dist"));
 };
-gulp_1.default.task("src-min", sourceMinFunction);
+gulp.task("source-min", sourceMinFunction);
 const watchFunction = () => {
-    gulp_1.default.watch("src/*.js", sourceMinFunction);
+    gulp.watch("src/*.js", sourceMinFunction);
 };
-gulp_1.default.task("watch", watchFunction);
-gulp_1.default.task("default", () => {
+gulp.task("watch", watchFunction);
+gulp.task("default", () => {
     sourceMinFunction();
     watchFunction();
 });

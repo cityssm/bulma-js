@@ -1,14 +1,12 @@
 {
   "compilerOptions": {
-    "target": "ES2017",
-    "module": "ES2020",
-    "moduleResolution": "Node",
+    "target": "ES2015",
+    "module": "ES2015",
     "isolatedModules": false,
     "declaration": true,
     "noImplicitAny": false,
     "removeComments": true,
-    "allowUnreachableCode": false,
-    "esModuleInterop": true
+    "allowUnreachableCode": false
   },
   "compileOnSave": true,
   "buildOnSave": true,
@@ -27,8 +25,5 @@
     "insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": false,
     "placeOpenBraceOnNewLineForFunctions": false,
     "placeOpenBraceOnNewLineForControlBlocks": false
-  },
-  "exclude": [
-    "src/*"
-  ]
+  }
 }

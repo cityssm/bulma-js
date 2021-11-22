@@ -1,16 +1,12 @@
 import type * as types from "../types";
 
-declare global {
-  interface Window { bulmaJS: types.BulmaJS; }
-}
-
 (() => {
 
   /*
    * Config
    */
 
-  const config = new Map<types.BooleanConfigProperties | types.StringConfigProperties, boolean | string>();
+  const config = new Map<types.ConfigProperties, boolean | string>();
 
   config.set("bulmaJS.initAttribute", "data-bulma-js-init");
   config.set("bulmaJS.elementIdPrefix", "bulma-js-");
@@ -44,6 +40,8 @@ declare global {
    * Window Collapse
    * Closes dropdowns when a click is not inside them
    */
+
+  let window_collapse_init = false;
 
   const window_collapse = (clickEvent?: Event) => {
 
@@ -286,13 +284,14 @@ declare global {
       init_dropdown(scopeElement);
     }
 
-    if (config.get("window.collapse")) {
+    if (config.get("window.collapse") && !window_collapse_init) {
       window.addEventListener("click", window_collapse);
+      window_collapse_init = true;
     }
   };
 
   const bulmaJS: types.BulmaJS = {
-    setConfig: (propertyName: string, propertyValue: unknown) => {
+    setConfig: (propertyName: types.ConfigProperties, propertyValue: unknown) => {
       config[propertyName] = propertyValue;
     },
     init,
