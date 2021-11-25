@@ -1,4 +1,4 @@
-export type BooleanConfigProperties = "navbar.burger" | "navbar.dropdown" | "dropdown" | "window.collapse";
+export type BooleanConfigProperties = "navbar.burger" | "navbar.dropdown" | "dropdown" | "tabs" | "window.collapse";
 export type StringConfigProperties = "bulmaJS.initAttribute" | "bulmaJS.elementIdPrefix";
 
 export type ConfigProperties = BooleanConfigProperties | StringConfigProperties;

@@ -5,12 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bulma-JS Test Page</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <style>
+      section {
+        margin-top: 2em;
+      }
+    </style>
   </head>
   <body>
-    <nav class="navbar" role="navigation" aria-label="main navigation">
+    <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <a class="navbar-item" href="https://bulma.io">
-          <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28" alt="Bulma" />
+          <img src="https://bulma.io/images/bulma-logo-white.png" width="112" height="28" alt="Bulma" />
         </a>
 
         <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
@@ -82,7 +87,7 @@
     </nav>
     <main class="container">
       <section>
-        <h1 class="title is-1">Dropdowns</h1>
+        <h1 class="title is-3">Dropdowns</h1>
         <div class="dropdown">
           <div class="dropdown-trigger">
             <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
@@ -116,6 +121,37 @@
         <button class="button is-success" id="add-dropdown-button" type="button">
           Add Another Dropdown
         </button>
+      </section>
+      <section>
+        <h1 class="title is-3">Tabs</h1>
+        <div class="tabs is-boxed">
+          <ul>
+            <li class="is-active"><a href="#tab--pictures">Pictures</a></li>
+            <li><a href="#tab--music">Music</a></li>
+            <li><a href="#tab--videos">Videos</a></li>
+            <li><a href="#tab--documents">Documents</a></li>
+          </ul>
+        </div>
+        <div id="tab--pictures">
+          <div class="box">
+            <h2 class="title is-5">Pictures</h2>
+          </div>
+        </div>
+        <div class="is-hidden" id="tab--music">
+          <div class="box">
+            <h2 class="title is-5">Music</h2>
+          </div>
+        </div>
+        <div class="is-hidden" id="tab--videos">
+          <div class="box">
+            <h2 class="title is-5">Videos</h2>
+          </div>
+        </div>
+        <div class="is-hidden" id="tab--documents">
+          <div class="box">
+            <h2 class="title is-5">Documents</h2>
+          </div>
+        </div>
       </section>
     </main>
     <script src="../dist/bulma-js.js"></script>

@@ -33,6 +33,7 @@ Add the following to your HTML.
 bulmaJS.setConfig("bulma.burger", true);
 bulmaJS.setConfig("bulma.dropdown", true);
 bulmaJS.setConfig("dropdown", true);
+bulmaJS.setConfig("tabs", true);
 bulmaJS.setConfig("window.collapse", true); // close dropdowns when clicked outside
 ```
 
@@ -83,6 +84,15 @@ bulmaJS.init(document.getElementById("container-element"));
 -   Support for the `dropdown` elements.
 
 ## Alternative JavaScript Project
+### Tabs
+
+<https://bulma.io/documentation/components/tabs/>
+
+-   Support for the `tabs` elements.
+-   Use the `href` attribute on each tab anchor element to link to
+    the corresponding tab panel.
+-   All tab panels should be siblings.  Hide the inactive tab panels with the `is-hidden` class.
+
 
 The [BulmaJS](https://github.com/VizuaaLOG/BulmaJS) project
 also provides JavaScript functionality for Bulma,

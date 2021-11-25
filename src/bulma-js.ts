@@ -13,6 +13,7 @@ import type * as types from "../types";
   config.set("navbar.burger", true);
   config.set("navbar.dropdown", true);
   config.set("dropdown", true);
+  config.set("tabs", true);
   config.set("window.collapse", true);
 
   /*
@@ -32,6 +33,7 @@ import type * as types from "../types";
 
   const anchorElementSpaceKeyToggle = (keyEvent: KeyboardEvent) => {
     if (keyEvent.key === " ") {
+      keyEvent.preventDefault();
       (keyEvent.currentTarget as HTMLElement).click();
     }
   };
@@ -267,6 +269,75 @@ import type * as types from "../types";
   };
 
   /*
+   * Tabs
+   * https://bulma.io/documentation/components/tabs/
+   */
+
+  const tab_show = (clickEvent: Event) => {
+
+    clickEvent.preventDefault();
+
+    const selectedTabAnchorElement = clickEvent.currentTarget as HTMLAnchorElement;
+
+    const tabAnchorElements = selectedTabAnchorElement.closest(".tabs").querySelectorAll("a[role='tab']");
+
+    for (const tabAnchorElement of tabAnchorElements) {
+      tabAnchorElement.ariaSelected = "false";
+      tabAnchorElement.closest("li").classList.remove("is-active");
+      document.querySelector("#" + tabAnchorElement.getAttribute("aria-controls")).classList.add("is-hidden");
+    }
+
+    selectedTabAnchorElement.ariaSelected = "true";
+    selectedTabAnchorElement.closest("li").classList.add("is-active");
+    document.querySelector("#" + selectedTabAnchorElement.getAttribute("aria-controls")).classList.remove("is-hidden");
+  };
+
+  const init_tabs = (scopeElement: Document | HTMLElement) => {
+
+    const tabAnchorElements =
+      scopeElement.querySelectorAll(".tabs a[href^='#']:not([" + config.get("bulmaJS.initAttribute") + "])") as NodeListOf<HTMLAnchorElement>;
+
+    for (const tabAnchorElement of tabAnchorElements) {
+
+      // Set tab roles
+      tabAnchorElement.setAttribute("role", "tab");
+      tabAnchorElement.closest(".tabs").setAttribute("role", "tablist");
+
+      // Initialize aria-selected
+      tabAnchorElement.ariaSelected =
+        tabAnchorElement.closest("li").classList.contains("is-active") ? "true" : "false";
+
+      // Set tabpanel role
+      const tabPanelElementId = tabAnchorElement.href.slice(Math.max(0, tabAnchorElement.href.indexOf("#") + 1));
+      const tabPanelElement = scopeElement.querySelector("#" + tabPanelElementId);
+      tabPanelElement.setAttribute("role", "tabpanel");
+
+      // Initialize aria-controls
+      tabAnchorElement.setAttribute("aria-controls", tabPanelElement.id);
+
+      // Initialize aria-labelledby
+      let tabAnchorElementId = tabAnchorElement.id;
+
+      if (!tabAnchorElementId || tabAnchorElementId === "") {
+        tabAnchorElementId = getNewElementId();
+        tabAnchorElement.id = tabAnchorElementId;
+      }
+
+      tabPanelElement.setAttribute("aria-labelledby", tabAnchorElementId);
+
+      // Set up the click
+      tabAnchorElement.addEventListener("click", tab_show);
+
+      tabAnchorElement.setAttribute(config.get("bulmaJS.initAttribute") as string, "true");
+    }
+  };
+
+  /*
+   * Panel Tabs
+   * https://bulma.io/documentation/components/panel/
+   */
+
+  /*
    * Init
    */
 
@@ -282,6 +353,10 @@ import type * as types from "../types";
 
     if (config.get("dropdown")) {
       init_dropdown(scopeElement);
+    }
+
+    if (config.get("tabs")) {
+      init_tabs(scopeElement);
     }
 
     if (config.get("window.collapse") && !window_collapse_init) {
