@@ -10,6 +10,7 @@ The unofficial missing JavaScript library for [Bulma](https://bulma.io/) website
 ## Getting Started
 
 Download [bulma-js.js](dist/bulma-js.js) here,
+use the [jsDelivr CDN](https://www.jsdelivr.com/package/npm/@cityssm/bulma-js?path=dist),
 or install from npm.
 
 ```sh
@@ -83,7 +84,6 @@ bulmaJS.init(document.getElementById("container-element"));
 
 -   Support for the `dropdown` elements.
 
-## Alternative JavaScript Project
 ### Tabs
 
 <https://bulma.io/documentation/components/tabs/>
@@ -93,6 +93,7 @@ bulmaJS.init(document.getElementById("container-element"));
     the corresponding tab panel.
 -   All tab panels should be siblings.  Hide the inactive tab panels with the `is-hidden` class.
 
+## Alternative Bulma JavaScript Project
 
 The [BulmaJS](https://github.com/VizuaaLOG/BulmaJS) project
 also provides JavaScript functionality for Bulma,
