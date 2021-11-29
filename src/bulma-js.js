@@ -7,6 +7,17 @@
     config.set("dropdown", true);
     config.set("tabs", true);
     config.set("window.collapse", true);
+    const modal_htmlClipped_set = () => {
+        document.documentElement.classList.add("is-clipped");
+    };
+    const modal_htmlClipped_toggle = () => {
+        if (document.querySelectorAll(".modal.is-active").length > 0) {
+            modal_htmlClipped_set();
+        }
+        else {
+            document.documentElement.classList.remove("is-clipped");
+        }
+    };
     let elementIdIndex = Date.now();
     const getNewElementId = () => {
         elementIdIndex += 1;
@@ -186,6 +197,85 @@
             tabAnchorElement.setAttribute(config.get("bulmaJS.initAttribute"), "true");
         }
     };
+    const alertConfirm = (confirmOptions, showCancelButton) => {
+        var _a, _b, _c, _d;
+        const activeElement = document.activeElement;
+        const modalElement = document.createElement("div");
+        modalElement.className = "modal is-active";
+        modalElement.setAttribute("aria-modal", "true");
+        modalElement.innerHTML = "<div class=\"modal-background\"></div>" +
+            "<div class=\"modal-content\" role=\"alertdialog\">" +
+            ("<aside" +
+                " class=\"message is-" + (confirmOptions.contextualColorName || "info") + "\"" +
+                " role=\"alert\"" +
+                " aria-live=\"assertive\"" +
+                ">" +
+                (confirmOptions.title
+                    ? "<header class=\"message-header\"></header>"
+                    : "") +
+                ("<div class=\"message-body\">" +
+                    "<div class=\"buttons is-block has-text-right\"></div>" +
+                    "</div>") +
+                "</aside>") +
+            "</div>";
+        if (confirmOptions.title) {
+            modalElement.querySelector(".message-header").textContent = confirmOptions.title;
+        }
+        if (confirmOptions.messageIsHtml) {
+            modalElement.querySelector(".message-body").insertAdjacentHTML("afterbegin", confirmOptions.message);
+        }
+        else {
+            const paragraphElement = document.createElement("p");
+            paragraphElement.textContent = confirmOptions.message;
+            modalElement.querySelector(".message-body").prepend(paragraphElement);
+        }
+        const okButtonElement = document.createElement("button");
+        okButtonElement.className = "button is-" + (((_a = confirmOptions.okButton) === null || _a === void 0 ? void 0 : _a.contextualColorName) || confirmOptions.contextualColorName || "info");
+        okButtonElement.textContent = ((_b = confirmOptions.okButton) === null || _b === void 0 ? void 0 : _b.text) || "OK";
+        okButtonElement.addEventListener("click", () => {
+            var _a;
+            modalElement.remove();
+            modal_htmlClipped_toggle();
+            activeElement.focus();
+            if ((_a = confirmOptions.okButton) === null || _a === void 0 ? void 0 : _a.callbackFunction) {
+                confirmOptions.okButton.callbackFunction();
+            }
+        });
+        modalElement.querySelector(".buttons").append(okButtonElement);
+        if (showCancelButton) {
+            const cancelButtonElement = document.createElement("button");
+            cancelButtonElement.className = "button";
+            if ((_c = confirmOptions.cancelButton) === null || _c === void 0 ? void 0 : _c.contextualColorName) {
+                cancelButtonElement.classList.add("is-" + confirmOptions.cancelButton.contextualColorName);
+            }
+            cancelButtonElement.textContent = ((_d = confirmOptions.cancelButton) === null || _d === void 0 ? void 0 : _d.text) || "Cancel";
+            cancelButtonElement.addEventListener("click", () => {
+                var _a;
+                modalElement.remove();
+                modal_htmlClipped_toggle();
+                activeElement.focus();
+                if ((_a = confirmOptions.cancelButton) === null || _a === void 0 ? void 0 : _a.callbackFunction) {
+                    confirmOptions.cancelButton.callbackFunction();
+                }
+            });
+            modalElement.querySelector(".buttons").prepend(cancelButtonElement);
+        }
+        document.body.append(modalElement);
+        modal_htmlClipped_set();
+        okButtonElement.focus();
+    };
+    const confirm = (confirmOptions) => {
+        alertConfirm(confirmOptions, true);
+    };
+    const alert = (alertOptions) => {
+        const confirmOptions = typeof (alertOptions) === "string"
+            ? {
+                message: alertOptions,
+                messageIsHtml: false
+            }
+            : Object.assign({}, alertOptions);
+        alertConfirm(confirmOptions, false);
+    };
     const init = (scopeElement = document) => {
         if (config.get("navbar.burger")) {
             init_navbar_burger(scopeElement);
@@ -211,6 +301,11 @@
         init,
         hideAllDropdowns: () => {
             window_collapse();
+        },
+        alert,
+        confirm,
+        toggleHtmlClipped: () => {
+            modal_htmlClipped_toggle();
         }
     };
     window.bulmaJS = bulmaJS;

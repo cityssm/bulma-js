@@ -17,6 +17,23 @@ import type * as types from "../types";
   config.set("window.collapse", true);
 
   /*
+   * Modal Helper
+   */
+
+  const modal_htmlClipped_set = () => {
+    document.documentElement.classList.add("is-clipped");
+  };
+
+  const modal_htmlClipped_toggle = () => {
+
+    if (document.querySelectorAll(".modal.is-active").length > 0) {
+      modal_htmlClipped_set();
+    } else {
+      document.documentElement.classList.remove("is-clipped");
+    }
+  };
+
+  /*
    * Element ID Helper
    */
 
@@ -333,9 +350,128 @@ import type * as types from "../types";
   };
 
   /*
-   * Panel Tabs
-   * https://bulma.io/documentation/components/panel/
+   * Alerts, Confirms
    */
+
+  const alertConfirm = (confirmOptions: types.ConfirmOptions, showCancelButton: boolean) => {
+
+    // Save active element to shift focus back
+    const activeElement = document.activeElement as HTMLElement;
+
+    /*
+     * Create modal
+     */
+
+    const modalElement = document.createElement("div");
+    modalElement.className = "modal is-active";
+    modalElement.setAttribute("aria-modal", "true");
+
+    modalElement.innerHTML = "<div class=\"modal-background\"></div>" +
+      "<div class=\"modal-content\" role=\"alertdialog\">" +
+      ("<aside" +
+        " class=\"message is-" + (confirmOptions.contextualColorName || "info") + "\"" +
+        " role=\"alert\"" +
+        " aria-live=\"assertive\"" +
+        ">" +
+
+        (confirmOptions.title
+          ? "<header class=\"message-header\"></header>"
+          : "") +
+
+        ("<div class=\"message-body\">" +
+          "<div class=\"buttons is-block has-text-right\"></div>" +
+          "</div>") +
+
+        "</aside>") +
+      "</div>";
+
+    if (confirmOptions.title) {
+      modalElement.querySelector(".message-header").textContent = confirmOptions.title;
+    }
+
+    if (confirmOptions.messageIsHtml) {
+      modalElement.querySelector(".message-body").insertAdjacentHTML("afterbegin", confirmOptions.message);
+    } else {
+      const paragraphElement = document.createElement("p");
+      paragraphElement.textContent = confirmOptions.message;
+      modalElement.querySelector(".message-body").prepend(paragraphElement);
+    }
+
+    /*
+     * OK Button
+     */
+
+    const okButtonElement = document.createElement("button");
+    okButtonElement.className = "button is-" + (confirmOptions.okButton ?.contextualColorName || confirmOptions.contextualColorName || "info");
+    okButtonElement.textContent = confirmOptions.okButton ?.text || "OK";
+
+    okButtonElement.addEventListener("click", () => {
+      modalElement.remove();
+      modal_htmlClipped_toggle();
+      activeElement.focus();
+
+      if (confirmOptions.okButton ?.callbackFunction) {
+        confirmOptions.okButton.callbackFunction();
+      }
+    });
+
+    modalElement.querySelector(".buttons").append(okButtonElement);
+
+    /*
+     * Cancel Button
+     */
+
+    if (showCancelButton) {
+
+      const cancelButtonElement = document.createElement("button");
+      cancelButtonElement.className = "button";
+
+      if (confirmOptions.cancelButton ?.contextualColorName) {
+        cancelButtonElement.classList.add("is-" + confirmOptions.cancelButton.contextualColorName);
+      }
+
+      cancelButtonElement.textContent = confirmOptions.cancelButton ?.text || "Cancel";
+
+      cancelButtonElement.addEventListener("click", () => {
+        modalElement.remove();
+        modal_htmlClipped_toggle();
+        activeElement.focus();
+
+        if (confirmOptions.cancelButton ?.callbackFunction) {
+          confirmOptions.cancelButton.callbackFunction();
+        }
+      });
+
+      modalElement.querySelector(".buttons").prepend(cancelButtonElement);
+    }
+
+    /*
+     * Show the modal
+     */
+
+    document.body.append(modalElement);
+    modal_htmlClipped_set();
+    okButtonElement.focus();
+  };
+
+  const confirm = (confirmOptions: types.ConfirmOptions) => {
+    alertConfirm(confirmOptions, true);
+  };
+
+  const alert = (alertOptions: string | types.AlertOptions) => {
+
+    const confirmOptions: types.ConfirmOptions =
+      typeof (alertOptions) === "string"
+        ? {
+          message: alertOptions,
+          messageIsHtml: false
+        }
+        : Object.assign({
+
+        }, alertOptions);
+
+    alertConfirm(confirmOptions, false);
+  };
 
   /*
    * Init
@@ -372,6 +508,11 @@ import type * as types from "../types";
     init,
     hideAllDropdowns: () => {
       window_collapse();
+    },
+    alert,
+    confirm,
+    toggleHtmlClipped: () => {
+      modal_htmlClipped_toggle();
     }
   };
 

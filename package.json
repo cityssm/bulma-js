@@ -1,6 +1,6 @@
 {
   "name": "@cityssm/bulma-js",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "The unofficial missing JavaScript library for Bulma websites",
   "type": "module",
   "exports": "dist/bulma-js.js",
@@ -19,7 +19,10 @@
     "bulma",
     "dropdown",
     "navbar",
-    "navigation"
+    "navigation",
+    "modal",
+    "alert",
+    "confirm"
   ],
   "author": "The Corporation of the City of Sault Ste. Marie",
   "license": "MIT",

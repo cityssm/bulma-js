@@ -93,6 +93,45 @@ bulmaJS.init(document.getElementById("container-element"));
     the corresponding tab panel.
 -   All tab panels should be siblings.  Hide the inactive tab panels with the `is-hidden` class.
 
+### Modal Alerts and Confirms
+
+Methods for creating accessible alerts and confirms.
+
+```javascript
+bulmaJS.alert("This is a basic alert!");
+
+bulmaJS.alert({
+  title: "Alert",
+  message: "This is a <strong>more complex</strong> alert.",
+  messageIsHtml: true,
+  contextualColorName: "success",
+  okButton: {
+    text: "Yes, But Not Too Complex",
+    callbackFunction: () => {
+      console.log("OK Button Pressed");
+    }
+  }
+});
+
+bulmaJS.confirm({
+  title: "Question",
+  message: "Have you ever been to Sault Ste. Marie, Ontario?",
+  contextualColorName: "primary",
+  okButton: {
+    text: "Yes, I Have",
+    callbackFunction: () => {
+      console.log("OK Button Pressed");
+    }
+  },
+  cancelButton: {
+    text: "No, But I'd Like To",
+    callbackFunction: () => {
+      console.log("Cancel Button Pressed");
+    }
+  }
+});
+```
+
 ## Alternative Bulma JavaScript Project
 
 The [BulmaJS](https://github.com/VizuaaLOG/BulmaJS) project

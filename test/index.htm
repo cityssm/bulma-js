@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bulma-JS Test Page</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@cityssm/bulma-a11y@0.4.0/bulma-a11y.min.css" integrity="sha256-YrqCMmMEmKYmLuLlI1phSUZA4V4V104f2CiZB1B1cvc=" crossorigin="anonymous">
     <style>
       section {
         margin-top: 2em;
@@ -151,6 +151,16 @@
           <div class="box">
             <h2 class="title is-5">Documents</h2>
           </div>
+        </div>
+      </section>
+      <section>
+        <h1 class="title is-3">
+          Alerts
+        </h1>
+        <div class="buttons">
+          <button id="alert--native" class="button is-danger" type="button">Native Browser Alert</button>
+          <button id="alert--basic" class="button is-success" type="button">Basic Bulma JS Alert</button>
+          <button id="confirm--complex" class="button is-warning" type="button">Bulma JS Confirm</button>
         </div>
       </section>
     </main>

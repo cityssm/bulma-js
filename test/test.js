@@ -34,4 +34,30 @@
   </div> `);
         bulmaJS.init(buttonElement.parentNode);
     });
+    document.querySelector("#alert--native").addEventListener("click", () => {
+        alert("Native Browser Alert");
+    });
+    document.querySelector("#alert--basic").addEventListener("click", () => {
+        bulmaJS.alert("Basic Bulma Alert");
+    });
+    document.querySelector("#confirm--complex").addEventListener("click", () => {
+        bulmaJS.confirm({
+            title: "Complex Alert",
+            message: "Did it get your <strong>attention</strong>?",
+            messageIsHtml: true,
+            contextualColorName: "danger",
+            okButton: {
+                text: "Yes, Definitely",
+                callbackFunction: () => {
+                    console.log("OK Button Pressed");
+                }
+            },
+            cancelButton: {
+                text: "Nope",
+                callbackFunction: () => {
+                    console.log("Cancel Button Pressed");
+                }
+            }
+        });
+    });
 })();
