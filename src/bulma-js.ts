@@ -403,7 +403,12 @@ import type * as types from "../types";
 
     const okButtonElement = document.createElement("button");
     okButtonElement.className = "button is-" + (confirmOptions.okButton ?.contextualColorName || confirmOptions.contextualColorName || "info");
-    okButtonElement.textContent = confirmOptions.okButton ?.text || "OK";
+
+    if (confirmOptions.okButton ?.textIsHtml) {
+      okButtonElement.innerHTML = confirmOptions.okButton ?.text || "OK";
+    } else {
+      okButtonElement.textContent = confirmOptions.okButton ?.text || "OK";
+    }
 
     okButtonElement.addEventListener("click", () => {
       modalElement.remove();
@@ -430,7 +435,11 @@ import type * as types from "../types";
         cancelButtonElement.classList.add("is-" + confirmOptions.cancelButton.contextualColorName);
       }
 
-      cancelButtonElement.textContent = confirmOptions.cancelButton ?.text || "Cancel";
+      if (confirmOptions.cancelButton ?.textIsHtml) {
+        cancelButtonElement.innerHTML = confirmOptions.cancelButton ?.text || "Cancel";
+      } else {
+        cancelButtonElement.textContent = confirmOptions.cancelButton ?.text || "Cancel";
+      }
 
       cancelButtonElement.addEventListener("click", () => {
         modalElement.remove();

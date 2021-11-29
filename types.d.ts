@@ -4,6 +4,7 @@ export declare type BulmaContextualColors = "dark" | "primary" | "link" | "info"
 export declare type ConfigProperties = BooleanConfigProperties | StringConfigProperties;
 export interface ConfirmButtonOptions {
     text?: string;
+    textIsHtml?: boolean;
     contextualColorName?: BulmaContextualColors;
     callbackFunction?: () => void;
 }

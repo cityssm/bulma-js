@@ -7,6 +7,7 @@ export type ConfigProperties = BooleanConfigProperties | StringConfigProperties;
 
 export interface ConfirmButtonOptions {
   text?: string;
+  textIsHtml?: boolean;
   contextualColorName?: BulmaContextualColors;
   callbackFunction?: () => void;
 }

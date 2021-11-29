@@ -198,7 +198,7 @@
         }
     };
     const alertConfirm = (confirmOptions, showCancelButton) => {
-        var _a, _b, _c, _d;
+        var _a, _b, _c, _d, _e, _f, _g, _h;
         const activeElement = document.activeElement;
         const modalElement = document.createElement("div");
         modalElement.className = "modal is-active";
@@ -231,7 +231,12 @@
         }
         const okButtonElement = document.createElement("button");
         okButtonElement.className = "button is-" + (((_a = confirmOptions.okButton) === null || _a === void 0 ? void 0 : _a.contextualColorName) || confirmOptions.contextualColorName || "info");
-        okButtonElement.textContent = ((_b = confirmOptions.okButton) === null || _b === void 0 ? void 0 : _b.text) || "OK";
+        if ((_b = confirmOptions.okButton) === null || _b === void 0 ? void 0 : _b.textIsHtml) {
+            okButtonElement.innerHTML = ((_c = confirmOptions.okButton) === null || _c === void 0 ? void 0 : _c.text) || "OK";
+        }
+        else {
+            okButtonElement.textContent = ((_d = confirmOptions.okButton) === null || _d === void 0 ? void 0 : _d.text) || "OK";
+        }
         okButtonElement.addEventListener("click", () => {
             var _a;
             modalElement.remove();
@@ -245,10 +250,15 @@
         if (showCancelButton) {
             const cancelButtonElement = document.createElement("button");
             cancelButtonElement.className = "button";
-            if ((_c = confirmOptions.cancelButton) === null || _c === void 0 ? void 0 : _c.contextualColorName) {
+            if ((_e = confirmOptions.cancelButton) === null || _e === void 0 ? void 0 : _e.contextualColorName) {
                 cancelButtonElement.classList.add("is-" + confirmOptions.cancelButton.contextualColorName);
             }
-            cancelButtonElement.textContent = ((_d = confirmOptions.cancelButton) === null || _d === void 0 ? void 0 : _d.text) || "Cancel";
+            if ((_f = confirmOptions.cancelButton) === null || _f === void 0 ? void 0 : _f.textIsHtml) {
+                cancelButtonElement.innerHTML = ((_g = confirmOptions.cancelButton) === null || _g === void 0 ? void 0 : _g.text) || "Cancel";
+            }
+            else {
+                cancelButtonElement.textContent = ((_h = confirmOptions.cancelButton) === null || _h === void 0 ? void 0 : _h.text) || "Cancel";
+            }
             cancelButtonElement.addEventListener("click", () => {
                 var _a;
                 modalElement.remove();

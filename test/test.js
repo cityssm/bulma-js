@@ -47,7 +47,8 @@
             messageIsHtml: true,
             contextualColorName: "danger",
             okButton: {
-                text: "Yes, Definitely",
+                text: "<strong>Yes</strong>, Definitely",
+                textIsHtml: true,
                 callbackFunction: () => {
                     console.log("OK Button Pressed");
                 }
