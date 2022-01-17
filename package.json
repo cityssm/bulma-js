@@ -37,7 +37,7 @@
     "@typescript-eslint/parser": "^5.4.0",
     "eslint": "^7.32.0",
     "eslint-plugin-import": "^2.25.3",
-    "eslint-plugin-unicorn": "^39.0.0",
+    "eslint-plugin-unicorn": "^40.1.0",
     "gulp": "^4.0.2",
     "gulp-minify": "^3.1.0",
     "gulp-replace": "^1.1.3"
