@@ -214,7 +214,7 @@
                     ? "<header class=\"message-header\"></header>"
                     : "") +
                 ("<div class=\"message-body\">" +
-                    "<div class=\"buttons is-block has-text-right\"></div>" +
+                    "<div class=\"buttons is-block has-text-right mt-4\"></div>" +
                     "</div>") +
                 "</aside>") +
             "</div>";
