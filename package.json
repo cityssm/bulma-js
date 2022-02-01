@@ -1,6 +1,6 @@
 {
   "name": "@cityssm/bulma-js",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "The unofficial missing JavaScript library for Bulma websites",
   "type": "module",
   "exports": "dist/bulma-js.js",
@@ -33,11 +33,11 @@
   "devDependencies": {
     "@types/gulp": "^4.0.9",
     "@types/gulp-minify": "^3.1.1",
-    "@typescript-eslint/eslint-plugin": "^5.4.0",
-    "@typescript-eslint/parser": "^5.4.0",
+    "@typescript-eslint/eslint-plugin": "^5.10.2",
+    "@typescript-eslint/parser": "^5.10.2",
     "eslint": "^7.32.0",
-    "eslint-plugin-import": "^2.25.3",
-    "eslint-plugin-unicorn": "^39.0.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-unicorn": "^40.1.0",
     "gulp": "^4.0.2",
     "gulp-minify": "^3.1.0",
     "gulp-replace": "^1.1.3"
