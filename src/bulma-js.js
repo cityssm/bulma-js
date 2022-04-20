@@ -231,6 +231,7 @@
         }
         const okButtonElement = document.createElement("button");
         okButtonElement.className = "button is-" + (((_a = confirmOptions.okButton) === null || _a === void 0 ? void 0 : _a.contextualColorName) || confirmOptions.contextualColorName || "info");
+        okButtonElement.dataset.cy = "ok";
         if ((_b = confirmOptions.okButton) === null || _b === void 0 ? void 0 : _b.textIsHtml) {
             okButtonElement.innerHTML = ((_c = confirmOptions.okButton) === null || _c === void 0 ? void 0 : _c.text) || "OK";
         }
@@ -250,6 +251,7 @@
         if (showCancelButton) {
             const cancelButtonElement = document.createElement("button");
             cancelButtonElement.className = "button";
+            cancelButtonElement.dataset.cy = "cancel";
             if ((_e = confirmOptions.cancelButton) === null || _e === void 0 ? void 0 : _e.contextualColorName) {
                 cancelButtonElement.classList.add("is-" + confirmOptions.cancelButton.contextualColorName);
             }

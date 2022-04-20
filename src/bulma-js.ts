@@ -403,6 +403,7 @@ import type * as types from "../types";
 
     const okButtonElement = document.createElement("button");
     okButtonElement.className = "button is-" + (confirmOptions.okButton ?.contextualColorName || confirmOptions.contextualColorName || "info");
+    okButtonElement.dataset.cy = "ok";
 
     if (confirmOptions.okButton ?.textIsHtml) {
       okButtonElement.innerHTML = confirmOptions.okButton ?.text || "OK";
@@ -430,6 +431,7 @@ import type * as types from "../types";
 
       const cancelButtonElement = document.createElement("button");
       cancelButtonElement.className = "button";
+      cancelButtonElement.dataset.cy = "cancel";
 
       if (confirmOptions.cancelButton ?.contextualColorName) {
         cancelButtonElement.classList.add("is-" + confirmOptions.cancelButton.contextualColorName);
