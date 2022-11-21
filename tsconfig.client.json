@@ -23,6 +23,7 @@
     "placeOpenBraceOnNewLineForControlBlocks": false
   },
   "files": [
-    "src/bulma-js.ts"
+    "src/bulma-js.ts",
+    "test/test.ts"
   ]
 }

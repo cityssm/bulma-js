@@ -25,6 +25,7 @@
     "placeOpenBraceOnNewLineForControlBlocks": false
   },
   "exclude": [
-    "src/*"
+    "src/*",
+    "test/*"
   ]
 }
