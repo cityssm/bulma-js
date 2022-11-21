@@ -6,6 +6,7 @@
     config.set("navbar.dropdown", true);
     config.set("dropdown", true);
     config.set("tabs", true);
+    config.set("delete.button", true);
     config.set("window.collapse", true);
     const modal_htmlClipped_set = () => {
         document.documentElement.classList.add("is-clipped");
@@ -197,6 +198,14 @@
             tabAnchorElement.setAttribute(config.get("bulmaJS.initAttribute"), "true");
         }
     };
+    const init_delete_button = (scopeElement) => {
+        const notificationDeleteElements = scopeElement.querySelectorAll(".message button.delete, .notification button.delete, .tag button.delete");
+        for (const notificationDeleteElement of notificationDeleteElements) {
+            notificationDeleteElement.addEventListener('click', () => {
+                notificationDeleteElement.closest('.message, .notification, .tag').remove();
+            });
+        }
+    };
     const alertConfirm = (confirmOptions, showCancelButton) => {
         var _a, _b, _c, _d, _e, _f, _g, _h;
         const activeElement = document.activeElement;
@@ -300,6 +309,9 @@
         }
         if (config.get("tabs")) {
             init_tabs(scopeElement);
+        }
+        if (config.get("delete.button")) {
+            init_delete_button(scopeElement);
         }
         if (config.get("window.collapse") && !window_collapse_init) {
             window.addEventListener("click", window_collapse);
