@@ -71,6 +71,15 @@ bulmaJS.init(document.getElementById("container-element"));
 -   Toggles appropriate Bulma classes **and ARIA attributes**.
 -   Close `dropdown` and `navbar-dropdown` elements when other parts of the webpage are clicked.
 
+### Delete Buttons (Messages, Notifications, and Tags)
+
+<https://bulma.io/documentation/elements/notification/>, 
+<https://bulma.io/documentation/components/message/>, 
+<https://bulma.io/documentation/elements/tag/>
+
+-   Support for `delete` buttons within `notification`, `message`, and `tag` elements.
+    (Thanks [thibaultmeyer](https://github.com/thibaultmeyer) for the feature.)
+
 ### Navbar
 
 <https://bulma.io/documentation/components/navbar/>
