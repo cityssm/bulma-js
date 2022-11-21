@@ -10,10 +10,6 @@
   },
   "compileOnSave": true,
   "buildOnSave": true,
-  "atom": {
-    "rewriteTsconfig": false,
-    "formatOnSave": true
-  },
   "formatCodeOptions": {
     "indentSize": 2,
     "tabSize": 2,
@@ -25,5 +21,8 @@
     "insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": false,
     "placeOpenBraceOnNewLineForFunctions": false,
     "placeOpenBraceOnNewLineForControlBlocks": false
-  }
+  },
+  "files": [
+    "src/bulma-js.ts"
+  ]
 }

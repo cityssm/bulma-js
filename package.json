@@ -3,7 +3,7 @@
   "version": "0.3.3",
   "description": "The unofficial missing JavaScript library for Bulma websites",
   "type": "module",
-  "exports": "dist/bulma-js.js",
+  "exports": "./dist/bulma-js.js",
   "engines": {
     "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
   },

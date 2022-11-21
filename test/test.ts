@@ -1,6 +1,6 @@
-//import type { BulmaJS } from "../types";
-//declare const bulmaJS: BulmaJS;
+import type { BulmaJS } from "../types";
 
+declare const bulmaJS: BulmaJS;
 
 (() => {
 
@@ -42,7 +42,7 @@
     </div>
   </div> `);
 
-    bulmaJS.init(buttonElement.parentNode);
+    bulmaJS.init(buttonElement.parentNode as HTMLElement);
   });
 
   document.querySelector("#alert--native").addEventListener("click", () => {
