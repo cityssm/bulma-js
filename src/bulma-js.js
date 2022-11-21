@@ -32,12 +32,11 @@
     };
     let window_collapse_init = false;
     const window_collapse = (clickEvent) => {
-        const element = clickEvent
-            ? clickEvent.target
-            : undefined;
+        const element = clickEvent ? clickEvent.target : undefined;
         const navbarDropdownElements = document.querySelectorAll(".navbar-item.has-dropdown.is-active");
         for (const navbarDropdownElement of navbarDropdownElements) {
-            if (!element || (!navbarDropdownElement.contains(element) && navbarDropdownElement !== element)) {
+            if (!element ||
+                (!navbarDropdownElement.contains(element) && navbarDropdownElement !== element)) {
                 navbar_dropdown_hide(navbarDropdownElement);
             }
         }
@@ -99,14 +98,18 @@
         }
     };
     const init_navbar_dropdown = (scopeElement) => {
-        const dropdownLinkElements = scopeElement.querySelectorAll(".navbar-item.has-dropdown:not(.is-hoverable) > .navbar-link:not([" + config.get("bulmaJS.initAttribute") + "])");
+        const dropdownLinkElements = scopeElement.querySelectorAll(".navbar-item.has-dropdown:not(.is-hoverable) > .navbar-link:not([" +
+            config.get("bulmaJS.initAttribute") +
+            "])");
         for (const dropdownLinkElement of dropdownLinkElements) {
             if (dropdownLinkElement.tagName === "A") {
                 dropdownLinkElement.href = "#";
             }
             dropdownLinkElement.setAttribute("role", "menuitem");
             dropdownLinkElement.setAttribute("aria-haspopup", "true");
-            if (dropdownLinkElement.closest(".navbar-item.has-dropdown").classList.contains("is-active")) {
+            if (dropdownLinkElement
+                .closest(".navbar-item.has-dropdown")
+                .classList.contains("is-active")) {
                 dropdownLinkElement.setAttribute("aria-expanded", "true");
             }
             else {
@@ -115,7 +118,9 @@
             if (!dropdownLinkElement.hasAttribute("aria-controls")) {
                 const navbarDropdownId = getNewElementId();
                 dropdownLinkElement.setAttribute("aria-controls", navbarDropdownId);
-                dropdownLinkElement.closest(".navbar-item.has-dropdown").querySelector(".navbar-dropdown").id = navbarDropdownId;
+                dropdownLinkElement
+                    .closest(".navbar-item.has-dropdown")
+                    .querySelector(".navbar-dropdown").id = navbarDropdownId;
             }
             dropdownLinkElement.addEventListener("click", navbar_dropdown_toggle);
             if (dropdownLinkElement.tagName === "A") {
@@ -145,9 +150,13 @@
         }
     };
     const init_dropdown = (scopeElement) => {
-        const dropdownTriggerButtonElements = scopeElement.querySelectorAll(".dropdown:not(.is-hoverable) > .dropdown-trigger button:not([" + config.get("bulmaJS.initAttribute") + "])");
+        const dropdownTriggerButtonElements = scopeElement.querySelectorAll(".dropdown:not(.is-hoverable) > .dropdown-trigger button:not([" +
+            config.get("bulmaJS.initAttribute") +
+            "])");
         for (const dropdownTriggerButtonElement of dropdownTriggerButtonElements) {
-            const dropdownMenuElement = dropdownTriggerButtonElement.closest(".dropdown").querySelector(".dropdown-menu");
+            const dropdownMenuElement = dropdownTriggerButtonElement
+                .closest(".dropdown")
+                .querySelector(".dropdown-menu");
             dropdownTriggerButtonElement.setAttribute("aria-haspopup", "true");
             if (!dropdownTriggerButtonElement.hasAttribute("aria-controls")) {
                 const dropdownMenuId = getNewElementId();
@@ -167,23 +176,32 @@
     const tab_show = (clickEvent) => {
         clickEvent.preventDefault();
         const selectedTabAnchorElement = clickEvent.currentTarget;
-        const tabAnchorElements = selectedTabAnchorElement.closest(".tabs").querySelectorAll("a[role='tab']");
+        const tabAnchorElements = selectedTabAnchorElement
+            .closest(".tabs")
+            .querySelectorAll("a[role='tab']");
         for (const tabAnchorElement of tabAnchorElements) {
             tabAnchorElement.ariaSelected = "false";
             tabAnchorElement.closest("li").classList.remove("is-active");
-            document.querySelector("#" + tabAnchorElement.getAttribute("aria-controls")).classList.add("is-hidden");
+            document
+                .querySelector("#" + tabAnchorElement.getAttribute("aria-controls"))
+                .classList.add("is-hidden");
         }
         selectedTabAnchorElement.ariaSelected = "true";
         selectedTabAnchorElement.closest("li").classList.add("is-active");
-        document.querySelector("#" + selectedTabAnchorElement.getAttribute("aria-controls")).classList.remove("is-hidden");
+        document
+            .querySelector("#" + selectedTabAnchorElement.getAttribute("aria-controls"))
+            .classList.remove("is-hidden");
     };
     const init_tabs = (scopeElement) => {
         const tabAnchorElements = scopeElement.querySelectorAll(".tabs a[href^='#']:not([" + config.get("bulmaJS.initAttribute") + "])");
         for (const tabAnchorElement of tabAnchorElements) {
             tabAnchorElement.setAttribute("role", "tab");
             tabAnchorElement.closest(".tabs").setAttribute("role", "tablist");
-            tabAnchorElement.ariaSelected =
-                tabAnchorElement.closest("li").classList.contains("is-active") ? "true" : "false";
+            tabAnchorElement.ariaSelected = tabAnchorElement
+                .closest("li")
+                .classList.contains("is-active")
+                ? "true"
+                : "false";
             const tabPanelElementId = tabAnchorElement.href.slice(Math.max(0, tabAnchorElement.href.indexOf("#") + 1));
             const tabPanelElement = scopeElement.querySelector("#" + tabPanelElementId);
             tabPanelElement.setAttribute("role", "tabpanel");
@@ -201,8 +219,8 @@
     const init_delete_button = (scopeElement) => {
         const notificationDeleteElements = scopeElement.querySelectorAll(".message button.delete, .notification button.delete, .tag button.delete");
         for (const notificationDeleteElement of notificationDeleteElements) {
-            notificationDeleteElement.addEventListener('click', () => {
-                notificationDeleteElement.closest('.message, .notification, .tag').remove();
+            notificationDeleteElement.addEventListener("click", () => {
+                notificationDeleteElement.closest(".message, .notification, .tag").remove();
             });
         }
     };
@@ -212,26 +230,29 @@
         const modalElement = document.createElement("div");
         modalElement.className = "modal is-active";
         modalElement.setAttribute("aria-modal", "true");
-        modalElement.innerHTML = "<div class=\"modal-background\"></div>" +
-            "<div class=\"modal-content\" role=\"alertdialog\">" +
-            ("<aside" +
-                " class=\"message is-" + (confirmOptions.contextualColorName || "info") + "\"" +
-                " role=\"alert\"" +
-                " aria-live=\"assertive\"" +
-                ">" +
-                (confirmOptions.title
-                    ? "<header class=\"message-header\"></header>"
-                    : "") +
-                ("<div class=\"message-body\">" +
-                    "<div class=\"buttons is-block has-text-right mt-4\"></div>" +
-                    "</div>") +
-                "</aside>") +
-            "</div>";
+        modalElement.innerHTML =
+            '<div class="modal-background"></div>' +
+                '<div class="modal-content" role="alertdialog">' +
+                ("<aside" +
+                    ' class="message is-' +
+                    (confirmOptions.contextualColorName || "info") +
+                    '"' +
+                    ' role="alert"' +
+                    ' aria-live="assertive"' +
+                    ">" +
+                    (confirmOptions.title ? '<header class="message-header"></header>' : "") +
+                    ('<div class="message-body">' +
+                        '<div class="buttons is-block has-text-right mt-4"></div>' +
+                        "</div>") +
+                    "</aside>") +
+                "</div>";
         if (confirmOptions.title) {
             modalElement.querySelector(".message-header").textContent = confirmOptions.title;
         }
         if (confirmOptions.messageIsHtml) {
-            modalElement.querySelector(".message-body").insertAdjacentHTML("afterbegin", confirmOptions.message);
+            modalElement
+                .querySelector(".message-body")
+                .insertAdjacentHTML("afterbegin", confirmOptions.message);
         }
         else {
             const paragraphElement = document.createElement("p");
@@ -239,7 +260,11 @@
             modalElement.querySelector(".message-body").prepend(paragraphElement);
         }
         const okButtonElement = document.createElement("button");
-        okButtonElement.className = "button is-" + (((_a = confirmOptions.okButton) === null || _a === void 0 ? void 0 : _a.contextualColorName) || confirmOptions.contextualColorName || "info");
+        okButtonElement.className =
+            "button is-" +
+                (((_a = confirmOptions.okButton) === null || _a === void 0 ? void 0 : _a.contextualColorName) ||
+                    confirmOptions.contextualColorName ||
+                    "info");
         okButtonElement.dataset.cy = "ok";
         if ((_b = confirmOptions.okButton) === null || _b === void 0 ? void 0 : _b.textIsHtml) {
             okButtonElement.innerHTML = ((_c = confirmOptions.okButton) === null || _c === void 0 ? void 0 : _c.text) || "OK";
@@ -289,7 +314,7 @@
         alertConfirm(confirmOptions, true);
     };
     const alert = (alertOptions) => {
-        const confirmOptions = typeof (alertOptions) === "string"
+        const confirmOptions = typeof alertOptions === "string"
             ? {
                 message: alertOptions,
                 messageIsHtml: false

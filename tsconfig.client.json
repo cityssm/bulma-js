@@ -1,29 +1,26 @@
 {
-  "compilerOptions": {
-    "target": "ES2017",
-    "module": "ES2015",
-    "isolatedModules": false,
-    "declaration": true,
-    "noImplicitAny": false,
-    "removeComments": true,
-    "allowUnreachableCode": false
-  },
-  "compileOnSave": true,
-  "buildOnSave": true,
-  "formatCodeOptions": {
-    "indentSize": 2,
-    "tabSize": 2,
-    "insertSpaceAfterCommaDelimiter": true,
-    "insertSpaceAfterSemicolonInForStatements": true,
-    "insertSpaceBeforeAndAfterBinaryOperators": true,
-    "insertSpaceAfterKeywordsInControlFlowStatements": true,
-    "insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
-    "insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": false,
-    "placeOpenBraceOnNewLineForFunctions": false,
-    "placeOpenBraceOnNewLineForControlBlocks": false
-  },
-  "files": [
-    "src/bulma-js.ts",
-    "test/test.ts"
-  ]
+    "compilerOptions": {
+        "target": "ES2017",
+        "module": "ES2015",
+        "isolatedModules": false,
+        "declaration": true,
+        "noImplicitAny": false,
+        "removeComments": true,
+        "allowUnreachableCode": false
+    },
+    "compileOnSave": true,
+    "buildOnSave": true,
+    "formatCodeOptions": {
+        "indentSize": 2,
+        "tabSize": 2,
+        "insertSpaceAfterCommaDelimiter": true,
+        "insertSpaceAfterSemicolonInForStatements": true,
+        "insertSpaceBeforeAndAfterBinaryOperators": true,
+        "insertSpaceAfterKeywordsInControlFlowStatements": true,
+        "insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
+        "insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": false,
+        "placeOpenBraceOnNewLineForFunctions": false,
+        "placeOpenBraceOnNewLineForControlBlocks": false
+    },
+    "files": ["src/bulma-js.ts", "test/test.ts"]
 }

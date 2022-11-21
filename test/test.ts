@@ -3,15 +3,14 @@ import type { BulmaJS } from "../types";
 declare const bulmaJS: BulmaJS;
 
 (() => {
+    document.querySelector("#add-dropdown-button").addEventListener("click", (clickEvent) => {
+        clickEvent.preventDefault();
 
-  document.querySelector("#add-dropdown-button").addEventListener("click", (clickEvent) => {
+        const buttonElement = clickEvent.currentTarget as HTMLElement;
 
-    clickEvent.preventDefault();
-
-    const buttonElement = clickEvent.currentTarget as HTMLElement;
-
-    buttonElement.insertAdjacentHTML("beforebegin",
-      ` <div class="dropdown">
+        buttonElement.insertAdjacentHTML(
+            "beforebegin",
+            ` <div class="dropdown">
     <div class="dropdown-trigger">
       <button class="button" aria-haspopup="true">
         <span>Dropdown button</span>
@@ -40,38 +39,39 @@ declare const bulmaJS: BulmaJS;
         </a>
       </div>
     </div>
-  </div> `);
+  </div> `
+        );
 
-    bulmaJS.init(buttonElement.parentNode as HTMLElement);
-  });
-
-  document.querySelector("#alert--native").addEventListener("click", () => {
-    alert("Native Browser Alert");
-  });
-
-  document.querySelector("#alert--basic").addEventListener("click", () => {
-    bulmaJS.alert("Basic Bulma Alert");
-  });
-
-  document.querySelector("#confirm--complex").addEventListener("click", () => {
-    bulmaJS.confirm({
-      title: "Complex Alert",
-      message: "Did it get your <strong>attention</strong>?",
-      messageIsHtml: true,
-      contextualColorName: "danger",
-      okButton: {
-        text: "<strong>Yes</strong>, Definitely",
-        textIsHtml: true,
-        callbackFunction: () => {
-          console.log("OK Button Pressed");
-        }
-      },
-      cancelButton: {
-        text: "Nope",
-        callbackFunction: () => {
-          console.log("Cancel Button Pressed");
-        }
-      }
+        bulmaJS.init(buttonElement.parentNode as HTMLElement);
     });
-  });
+
+    document.querySelector("#alert--native").addEventListener("click", () => {
+        alert("Native Browser Alert");
+    });
+
+    document.querySelector("#alert--basic").addEventListener("click", () => {
+        bulmaJS.alert("Basic Bulma Alert");
+    });
+
+    document.querySelector("#confirm--complex").addEventListener("click", () => {
+        bulmaJS.confirm({
+            title: "Complex Alert",
+            message: "Did it get your <strong>attention</strong>?",
+            messageIsHtml: true,
+            contextualColorName: "danger",
+            okButton: {
+                text: "<strong>Yes</strong>, Definitely",
+                textIsHtml: true,
+                callbackFunction: () => {
+                    console.log("OK Button Pressed");
+                }
+            },
+            cancelButton: {
+                text: "Nope",
+                callbackFunction: () => {
+                    console.log("Cancel Button Pressed");
+                }
+            }
+        });
+    });
 })();

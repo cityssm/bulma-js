@@ -2,7 +2,8 @@ import gulp from "gulp";
 import replace from "gulp-replace";
 import minify from "gulp-minify";
 const sourceMinFunction = () => {
-    return gulp.src("src/*.js", { allowEmpty: true })
+    return gulp
+        .src("src/*.js", { allowEmpty: true })
         .pipe(replace("export {};", ""))
         .pipe(minify({ noSource: true, ext: { min: ".js" } }))
         .pipe(gulp.dest("dist"));
