@@ -14,6 +14,7 @@ import type * as types from "../types";
   config.set("navbar.dropdown", true);
   config.set("dropdown", true);
   config.set("tabs", true);
+  config.set("delete.button", true);
   config.set("window.collapse", true);
 
   /*
@@ -350,6 +351,18 @@ import type * as types from "../types";
   };
 
   /*
+   * Delete button (notification, message)
+   */
+  const init_delete_button = (scopeElement) => {
+    const notificationDeleteElements = scopeElement.querySelectorAll(".message button.delete, .notification button.delete, .tag button.delete");
+    for (const notificationDeleteElement of notificationDeleteElements) {
+        notificationDeleteElement.addEventListener('click', () => {
+            notificationDeleteElement.closest('.message, .notification, .tag').remove();
+        });
+    }
+  };
+
+  /*
    * Alerts, Confirms
    */
 
@@ -504,6 +517,10 @@ import type * as types from "../types";
 
     if (config.get("tabs")) {
       init_tabs(scopeElement);
+    }
+
+    if (config.get("delete.button")) {
+      init_delete_button(scopeElement);
     }
 
     if (config.get("window.collapse") && !window_collapse_init) {
