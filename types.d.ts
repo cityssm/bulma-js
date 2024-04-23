@@ -1,7 +1,7 @@
-export declare type BooleanConfigProperties = "navbar.burger" | "navbar.dropdown" | "dropdown" | "tabs" | "delete.button" | "window.collapse";
-export declare type StringConfigProperties = "bulmaJS.initAttribute" | "bulmaJS.elementIdPrefix";
-export declare type BulmaContextualColors = "dark" | "primary" | "link" | "info" | "success" | "warning" | "danger";
-export declare type ConfigProperties = BooleanConfigProperties | StringConfigProperties;
+export type BooleanConfigProperties = 'navbar.burger' | 'navbar.dropdown' | 'dropdown' | 'tabs' | 'delete.button' | 'window.collapse';
+export type StringConfigProperties = 'bulmaJS.initAttribute' | 'bulmaJS.elementIdPrefix';
+export type BulmaContextualColors = 'dark' | 'primary' | 'link' | 'info' | 'success' | 'warning' | 'danger';
+export type ConfigProperties = BooleanConfigProperties | StringConfigProperties;
 export interface ConfirmButtonOptions {
     text?: string;
     textIsHtml?: boolean;

@@ -1,8 +1,10 @@
 (() => {
-    document.querySelector("#add-dropdown-button").addEventListener("click", (clickEvent) => {
+    var _a, _b, _c, _d;
+    (_a = document
+        .querySelector('#add-dropdown-button')) === null || _a === void 0 ? void 0 : _a.addEventListener('click', (clickEvent) => {
         clickEvent.preventDefault();
         const buttonElement = clickEvent.currentTarget;
-        buttonElement.insertAdjacentHTML("beforebegin", ` <div class="dropdown">
+        buttonElement.insertAdjacentHTML('beforebegin', ` <div class="dropdown">
     <div class="dropdown-trigger">
       <button class="button" aria-haspopup="true">
         <span>Dropdown button</span>
@@ -34,29 +36,29 @@
   </div> `);
         bulmaJS.init(buttonElement.parentNode);
     });
-    document.querySelector("#alert--native").addEventListener("click", () => {
-        alert("Native Browser Alert");
+    (_b = document.querySelector('#alert--native')) === null || _b === void 0 ? void 0 : _b.addEventListener('click', () => {
+        alert('Native Browser Alert');
     });
-    document.querySelector("#alert--basic").addEventListener("click", () => {
-        bulmaJS.alert("Basic Bulma Alert");
+    (_c = document.querySelector('#alert--basic')) === null || _c === void 0 ? void 0 : _c.addEventListener('click', () => {
+        bulmaJS.alert('Basic Bulma Alert');
     });
-    document.querySelector("#confirm--complex").addEventListener("click", () => {
+    (_d = document.querySelector('#confirm--complex')) === null || _d === void 0 ? void 0 : _d.addEventListener('click', () => {
         bulmaJS.confirm({
-            title: "Complex Alert",
-            message: "Did it get your <strong>attention</strong>?",
+            title: 'Complex Alert',
+            message: 'Did it get your <strong>attention</strong>?',
             messageIsHtml: true,
-            contextualColorName: "danger",
+            contextualColorName: 'danger',
             okButton: {
-                text: "<strong>Yes</strong>, Definitely",
+                text: '<strong>Yes</strong>, Definitely',
                 textIsHtml: true,
                 callbackFunction: () => {
-                    console.log("OK Button Pressed");
+                    console.log('OK Button Pressed');
                 }
             },
             cancelButton: {
-                text: "Nope",
+                text: 'Nope',
                 callbackFunction: () => {
-                    console.log("Cancel Button Pressed");
+                    console.log('Cancel Button Pressed');
                 }
             }
         });

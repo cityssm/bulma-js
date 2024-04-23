@@ -22,7 +22,7 @@ Add the following to your HTML.
 ```html
 <script src="dist/bulma-js.js"></script>
 <script>
-  bulmaJS.init();
+  bulmaJS.init()
 </script>
 ```
 
@@ -31,23 +31,23 @@ Add the following to your HTML.
 ### Toggle Functionality
 
 ```javascript
-bulmaJS.setConfig("bulma.burger", true);
-bulmaJS.setConfig("bulma.dropdown", true);
-bulmaJS.setConfig("dropdown", true);
-bulmaJS.setConfig("tabs", true);
-bulmaJS.setConfig("window.collapse", true); // close dropdowns when clicked outside
+bulmaJS.setConfig('bulma.burger', true)
+bulmaJS.setConfig('bulma.dropdown', true)
+bulmaJS.setConfig('dropdown', true)
+bulmaJS.setConfig('tabs', true)
+bulmaJS.setConfig('window.collapse', true) // close dropdowns when clicked outside
 ```
 
 ### Set Unique Element Id Prefix
 
 ```javascript
-bulmaJS.setConfig("bulmaJS.elementIdPrefix", "bulma-js-");
+bulmaJS.setConfig('bulmaJS.elementIdPrefix', 'bulma-js-')
 ```
 
 ### Set the "Initialized" Attribute Name
 
 ```javascript
-bulmaJS.setConfig("bulmaJS.initAttribute", "data-bulma-js-init");
+bulmaJS.setConfig('bulmaJS.initAttribute', 'data-bulma-js-init')
 ```
 
 ### Initialize Functionality on Entire Page
@@ -55,7 +55,7 @@ bulmaJS.setConfig("bulmaJS.initAttribute", "data-bulma-js-init");
 Can be called multiple times after page contents have changed.
 
 ```javascript
-bulmaJS.init();
+bulmaJS.init()
 ```
 
 ### Initialize Functionality on the Children of an Element
@@ -63,82 +63,82 @@ bulmaJS.init();
 Helpful after populating an area with an AJAX call.
 
 ```javascript
-bulmaJS.init(document.getElementById("container-element"));
+bulmaJS.init(document.getElementById('container-element'))
 ```
 
 ## Features So Far
 
--   Toggles appropriate Bulma classes **and ARIA attributes**.
--   Close `dropdown` and `navbar-dropdown` elements when other parts of the webpage are clicked.
+- Toggles appropriate Bulma classes **and ARIA attributes**.
+- Close `dropdown` and `navbar-dropdown` elements when other parts of the webpage are clicked.
 
 ### Delete Buttons (Messages, Notifications, and Tags)
 
-<https://bulma.io/documentation/elements/notification/>, 
-<https://bulma.io/documentation/components/message/>, 
+<https://bulma.io/documentation/elements/notification/>,
+<https://bulma.io/documentation/components/message/>,
 <https://bulma.io/documentation/elements/tag/>
 
--   Support for `delete` buttons within `notification`, `message`, and `tag` elements.
-    (Thanks [thibaultmeyer](https://github.com/thibaultmeyer) for the feature.)
+- Support for `delete` buttons within `notification`, `message`, and `tag` elements.
+  (Thanks [thibaultmeyer](https://github.com/thibaultmeyer) for the feature.)
 
 ### Navbar
 
 <https://bulma.io/documentation/components/navbar/>
 
--   Support for the `navbar-burger` element.
--   Support for the `navbar-dropdown` elements.
+- Support for the `navbar-burger` element.
+- Support for the `navbar-dropdown` elements.
 
 ### Dropdown
 
 <https://bulma.io/documentation/components/dropdown/>
 
--   Support for the `dropdown` elements.
+- Support for the `dropdown` elements.
 
 ### Tabs
 
 <https://bulma.io/documentation/components/tabs/>
 
--   Support for the `tabs` elements.
--   Use the `href` attribute on each tab anchor element to link to
-    the corresponding tab panel.
--   All tab panels should be siblings.  Hide the inactive tab panels with the `is-hidden` class.
+- Support for the `tabs` elements.
+- Use the `href` attribute on each tab anchor element to link to
+  the corresponding tab panel.
+- All tab panels should be siblings. Hide the inactive tab panels with the `is-hidden` class.
 
 ### Modal Alerts and Confirms
 
 Methods for creating accessible alerts and confirms.
 
 ```javascript
-bulmaJS.alert("This is a basic alert!");
+bulmaJS.alert('This is a basic alert!')
 
 bulmaJS.alert({
-  title: "Alert",
-  message: "This is a <strong>more complex</strong> alert.",
+  title: 'Alert',
+  message: 'This is a <strong>more complex</strong> alert.',
   messageIsHtml: true,
-  contextualColorName: "success",
+  contextualColorName: 'success',
   okButton: {
-    text: "Yes, But Not Too Complex",
+    text: 'Yes, But Not Too Complex',
     callbackFunction: () => {
-      console.log("OK Button Pressed");
+      console.log('OK Button Pressed')
     }
   }
-});
+})
 
 bulmaJS.confirm({
-  title: "Question",
-  message: "Have you ever been to Sault Ste. Marie, Ontario?",
-  contextualColorName: "primary",
+  title: 'Question',
+  message: 'Have you ever been to Sault Ste. Marie, Ontario?',
+  contextualColorName: 'primary',
   okButton: {
-    text: "Yes, I Have",
+    text: 'Yes, I Have',
     callbackFunction: () => {
-      console.log("OK Button Pressed");
+      console.log('OK Button Pressed')
     }
   },
   cancelButton: {
     text: "No, But I'd Like To",
     callbackFunction: () => {
-      console.log("Cancel Button Pressed");
+      console.log('Cancel Button Pressed')
     }
   }
-});
+})
 ```
 
 ## Alternative Bulma JavaScript Project
@@ -150,7 +150,7 @@ I recommend you take a look if you need more functionality than is offered here.
 
 This project goes in a different direction in a few ways.
 
--   Prioritizes simple usage in an HTML `script` tag.  No `import` or `require` necessary.
--   TypeScript types available.
--   Goes beyond just toggling the `is-active` Bulma classes, and manages ARIA attributes as well to increase accessibility.
--   Attempts to correct common issues (i.e. missing roles, missing ids) that may affect accessibility.
+- Prioritizes simple usage in an HTML `script` tag. No `import` or `require` necessary.
+- TypeScript types available.
+- Goes beyond just toggling the `is-active` Bulma classes, and manages ARIA attributes as well to increase accessibility.
+- Attempts to correct common issues (i.e. missing roles, missing ids) that may affect accessibility.

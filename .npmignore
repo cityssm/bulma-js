@@ -10,5 +10,4 @@ test
 .prettierignore
 .prettierrc.json
 gulpfile.*
-tsconfig.json
-tsconfig.client.json
+tsconfig.*
