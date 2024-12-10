@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "target": "ES6",
+    "target": "ES2021",
+    "module": "CommonJS",
     "isolatedModules": true,
     "declaration": true,
     "noImplicitAny": false,
@@ -10,5 +11,5 @@
   },
   "compileOnSave": true,
   "buildOnSave": true,
-  "files": ["src/bulma-js.ts", "test/test.ts"]
+  "include": ["./*", "./**/*"]
 }

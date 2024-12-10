@@ -1,16 +1,14 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
-    "module": "Node16",
-    "moduleResolution": "Node16",
-    "isolatedModules": false,
+    "target": "ES2021",
+    "module": "none",
     "declaration": true,
     "noImplicitAny": false,
+    "removeComments": true,
     "allowUnreachableCode": false,
-    "esModuleInterop": true,
     "strictNullChecks": true
   },
   "compileOnSave": true,
   "buildOnSave": true,
-  "exclude": ["src/*", "test/*"]
+  "include": ["./*", "./**/*"]
 }

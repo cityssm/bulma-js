@@ -1,5 +1,4 @@
 import gulp from 'gulp'
-import minify from 'gulp-minify'
 import replace from 'gulp-replace'
 
 /*
@@ -10,7 +9,6 @@ function sourceMinFunction(): NodeJS.ReadWriteStream {
   return gulp
     .src('src/*.js', { allowEmpty: true })
     .pipe(replace('export {};', ''))
-    .pipe(minify({ noSource: true, ext: { min: '.js' } }))
     .pipe(gulp.dest('dist'))
 }
 

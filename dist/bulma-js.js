@@ -1,1 +1,456 @@
-(()=>{const t=new Map;function e(){document.documentElement.classList.add("is-clipped")}function n(){document.querySelectorAll(".modal.is-active").length>0?e():document.documentElement.classList.remove("is-clipped")}t.set("bulmaJS.initAttribute","data-bulma-js-init"),t.set("bulmaJS.elementIdPrefix","bulma-js-"),t.set("navbar.burger",!0),t.set("navbar.dropdown",!0),t.set("dropdown",!0),t.set("tabs",!0),t.set("delete.button",!0),t.set("window.collapse",!0);let o=Date.now();function i(){return`bulma-js-${o+=1}`}function a(t){" "===t.key&&(t.preventDefault(),t.currentTarget.click())}let s=!1;function l(t){const e=t?t.target:void 0,n=document.querySelectorAll(".navbar-item.has-dropdown.is-active");for(const t of n)e&&(t.contains(e)||t===e)||c(t);const o=document.querySelectorAll(".dropdown.is-active");for(const t of o)e&&(t.contains(e)||t===e)||d(t)}function r(t){var e;t.preventDefault();const n=t.currentTarget,o=null===(e=n.closest(".navbar"))||void 0===e?void 0:e.querySelector(".navbar-menu");null!=o&&(n.classList.contains("is-active")?(o.classList.remove("is-active"),n.classList.remove("is-active"),n.setAttribute("aria-expanded","false")):(o.classList.add("is-active"),n.classList.add("is-active"),n.setAttribute("aria-expanded","true")))}function c(t){t.classList.remove("is-active");const e=t.querySelector(".navbar-link");null==e||e.setAttribute("aria-expanded","false")}function u(t){t.preventDefault();const e=t.currentTarget.closest(".navbar-item.has-dropdown");e.classList.contains("is-active")?c(e):function(t){t.classList.add("is-active");const e=t.querySelector(".navbar-link");null==e||e.setAttribute("aria-expanded","true")}(e)}function d(t){t.classList.remove("is-active");const e=t.querySelector(".dropdown-trigger button");null==e||e.setAttribute("aria-expanded","false")}function v(t){const e=t.currentTarget.closest(".dropdown");e.classList.contains("is-active")?d(e):function(t){t.classList.add("is-active");const e=t.querySelector(".dropdown-trigger button");null==e||e.setAttribute("aria-expanded","true")}(e)}function b(t){var e,n,o,i,a;t.preventDefault();const s=t.currentTarget,l=null===(e=s.closest(".tabs"))||void 0===e?void 0:e.querySelectorAll("a[role='tab']");for(const t of l)t.ariaSelected="false",null===(n=t.closest("li"))||void 0===n||n.classList.remove("is-active"),null===(o=document.querySelector("#"+t.getAttribute("aria-controls")))||void 0===o||o.classList.add("is-hidden");s.ariaSelected="true",null===(i=s.closest("li"))||void 0===i||i.classList.add("is-active"),null===(a=document.querySelector("#"+s.getAttribute("aria-controls")))||void 0===a||a.classList.remove("is-hidden")}function m(t,o){var i,a,s,l,r,c,u,d,v,b,m,f;const g=document.activeElement,p=document.createElement("div");if(p.className="modal is-active",p.setAttribute("aria-modal","true"),p.innerHTML='<div class="modal-background"></div><div class="modal-content" role="alertdialog"><aside class="message is-'+(t.contextualColorName||"info")+'" role="alert" aria-live="assertive">'+(t.title?'<header class="message-header"></header>':"")+'<div class="message-body"><div class="buttons is-block has-text-right mt-4"></div></div></aside></div>',t.title&&(p.querySelector(".message-header").textContent=t.title),t.messageIsHtml)null===(i=p.querySelector(".message-body"))||void 0===i||i.insertAdjacentHTML("afterbegin",t.message);else{const e=document.createElement("p");e.textContent=t.message,null===(a=p.querySelector(".message-body"))||void 0===a||a.prepend(e)}const A=document.createElement("button");if(A.className="button is-"+((null===(s=t.okButton)||void 0===s?void 0:s.contextualColorName)||t.contextualColorName||"info"),A.dataset.cy="ok",(null===(l=t.okButton)||void 0===l?void 0:l.textIsHtml)?A.innerHTML=(null===(r=t.okButton)||void 0===r?void 0:r.text)||"OK":A.textContent=(null===(c=t.okButton)||void 0===c?void 0:c.text)||"OK",A.addEventListener("click",()=>{var e;p.remove(),n(),g.focus(),(null===(e=t.okButton)||void 0===e?void 0:e.callbackFunction)&&t.okButton.callbackFunction()}),null===(u=p.querySelector(".buttons"))||void 0===u||u.append(A),o){const e=document.createElement("button");e.className="button",e.dataset.cy="cancel",(null===(d=t.cancelButton)||void 0===d?void 0:d.contextualColorName)&&e.classList.add("is-"+t.cancelButton.contextualColorName),(null===(v=t.cancelButton)||void 0===v?void 0:v.textIsHtml)?e.innerHTML=(null===(b=t.cancelButton)||void 0===b?void 0:b.text)||"Cancel":e.textContent=(null===(m=t.cancelButton)||void 0===m?void 0:m.text)||"Cancel",e.addEventListener("click",()=>{var e;p.remove(),n(),g.focus(),(null===(e=t.cancelButton)||void 0===e?void 0:e.callbackFunction)&&t.cancelButton.callbackFunction()}),null===(f=p.querySelector(".buttons"))||void 0===f||f.prepend(e)}document.body.append(p),e(),A.focus()}const f={setConfig:(e,n)=>{t[e]=n},init:function(e=document){t.get("navbar.burger")&&function(e){const n=e.querySelectorAll(".navbar-burger:not(["+t.get("bulmaJS.initAttribute")+"])");for(const e of n)"A"===e.tagName&&(e.href="#",e.setAttribute("role","button")),e.addEventListener("click",r),"A"===e.tagName&&e.addEventListener("keyup",a),e.setAttribute(t.get("bulmaJS.initAttribute"),"true")}(e),t.get("navbar.dropdown")&&function(e){var n,o;const s=e.querySelectorAll(".navbar-item.has-dropdown:not(.is-hoverable) > .navbar-link:not(["+t.get("bulmaJS.initAttribute")+"])");for(const e of s){if("A"===e.tagName&&(e.href="#"),e.setAttribute("role","menuitem"),e.setAttribute("aria-haspopup","true"),(null===(n=e.closest(".navbar-item.has-dropdown"))||void 0===n?void 0:n.classList.contains("is-active"))?e.setAttribute("aria-expanded","true"):e.setAttribute("aria-expanded","false"),!e.hasAttribute("aria-controls")){const t=i();e.setAttribute("aria-controls",t),null===(o=e.closest(".navbar-item.has-dropdown"))||void 0===o||(o.querySelector(".navbar-dropdown").id=t)}e.addEventListener("click",u),"A"===e.tagName&&e.addEventListener("keyup",a),e.setAttribute(t.get("bulmaJS.initAttribute"),"true")}}(e),t.get("dropdown")&&function(e){var n;const o=e.querySelectorAll(".dropdown:not(.is-hoverable) > .dropdown-trigger button:not(["+t.get("bulmaJS.initAttribute")+"])");for(const e of o){const o=null===(n=e.closest(".dropdown"))||void 0===n?void 0:n.querySelector(".dropdown-menu");if(e.setAttribute("aria-haspopup","true"),!e.hasAttribute("aria-controls")){const t=i();e.setAttribute("aria-controls",t),o.id=t}if("menu"===o.getAttribute("role")){const t=o.querySelectorAll("a.dropdown-item");for(const e of t)e.setAttribute("role","menuitem")}e.addEventListener("click",v),e.setAttribute(t.get("bulmaJS.initAttribute"),"true")}}(e),t.get("tabs")&&function(e){var n,o;const a=e.querySelectorAll(".tabs a[href^='#']:not(["+t.get("bulmaJS.initAttribute")+"])");for(const s of a){s.setAttribute("role","tab"),null===(n=s.closest(".tabs"))||void 0===n||n.setAttribute("role","tablist"),s.ariaSelected=(null===(o=s.closest("li"))||void 0===o?void 0:o.classList.contains("is-active"))?"true":"false";const a=s.href.slice(Math.max(0,s.href.indexOf("#")+1)),l=e.querySelector("#"+a);null==l||l.setAttribute("role","tabpanel"),s.setAttribute("aria-controls",l.id);let r=s.id;r&&""!==r||(r=i(),s.id=r),null==l||l.setAttribute("aria-labelledby",r),s.addEventListener("click",b),s.setAttribute(t.get("bulmaJS.initAttribute"),"true")}}(e),t.get("delete.button")&&function(t){const e=t.querySelectorAll(".message button.delete, .notification button.delete, .tag button.delete");for(const t of e)t.addEventListener("click",()=>{t.closest(".message, .notification, .tag").remove()})}(e),t.get("window.collapse")&&!s&&(window.addEventListener("click",l),s=!0)},hideAllDropdowns:()=>{l()},alert:function(t){m("string"==typeof t?{message:t,messageIsHtml:!1}:Object.assign({},t),!1)},confirm:function(t){m(t,!0)},toggleHtmlClipped:()=>{n()}};window.bulmaJS=f})();
+/* eslint-disable @typescript-eslint/naming-convention, unicorn/filename-case, @eslint-community/eslint-comments/disable-enable-pair */
+(() => {
+    /*
+     * Config
+     */
+    const config = new Map();
+    config.set('bulmaJS.initAttribute', 'data-bulma-js-init');
+    config.set('bulmaJS.elementIdPrefix', 'bulma-js-');
+    config.set('navbar.burger', true);
+    config.set('navbar.dropdown', true);
+    config.set('dropdown', true);
+    config.set('tabs', true);
+    config.set('delete.button', true);
+    config.set('window.collapse', true);
+    /*
+     * Modal Helper
+     */
+    function modal_htmlClipped_set() {
+        document.documentElement.classList.add('is-clipped');
+    }
+    function modal_htmlClipped_toggle() {
+        if (document.querySelectorAll('.modal.is-active').length > 0) {
+            modal_htmlClipped_set();
+        }
+        else {
+            document.documentElement.classList.remove('is-clipped');
+        }
+    }
+    /*
+     * Element ID Helper
+     */
+    let elementIdIndex = Date.now();
+    function getNewElementId() {
+        elementIdIndex += 1;
+        return `bulma-js-${elementIdIndex}`;
+    }
+    /*
+     * "Space on Anchor" Helper
+     */
+    function anchorElementSpaceKeyToggle(keyEvent) {
+        if (keyEvent.key === ' ') {
+            keyEvent.preventDefault();
+            keyEvent.currentTarget.click();
+        }
+    }
+    /*
+     * Window Collapse
+     * Closes dropdowns when a click is not inside them
+     */
+    let window_collapse_init = false;
+    function window_collapse(clickEvent) {
+        const element = clickEvent ? clickEvent.target : undefined;
+        const navbarDropdownElements = document.querySelectorAll('.navbar-item.has-dropdown.is-active');
+        for (const navbarDropdownElement of navbarDropdownElements) {
+            if (!element ||
+                (!navbarDropdownElement.contains(element) &&
+                    navbarDropdownElement !== element)) {
+                navbar_dropdown_hide(navbarDropdownElement);
+            }
+        }
+        const dropdownElements = document.querySelectorAll('.dropdown.is-active');
+        for (const dropdownElement of dropdownElements) {
+            if (!element ||
+                (!dropdownElement.contains(element) && dropdownElement !== element)) {
+                dropdown_hide(dropdownElement);
+            }
+        }
+    }
+    /*
+     * Navbar Burger
+     */
+    function navbar_burger_toggle(clickEvent) {
+        clickEvent.preventDefault();
+        const burgerButtonElement = clickEvent.currentTarget;
+        const menuElement = burgerButtonElement
+            .closest('.navbar')
+            ?.querySelector('.navbar-menu');
+        if (menuElement === undefined || menuElement === null) {
+            return;
+        }
+        if (burgerButtonElement.classList.contains('is-active')) {
+            // hide the menu
+            menuElement.classList.remove('is-active');
+            burgerButtonElement.classList.remove('is-active');
+            burgerButtonElement.setAttribute('aria-expanded', 'false');
+        }
+        else {
+            // show the menu
+            menuElement.classList.add('is-active');
+            burgerButtonElement.classList.add('is-active');
+            burgerButtonElement.setAttribute('aria-expanded', 'true');
+        }
+    }
+    function init_navbar_burger(scopeElement) {
+        const burgerButtonElements = scopeElement.querySelectorAll('.navbar-burger:not([' + config.get('bulmaJS.initAttribute') + '])');
+        for (const burgerButtonElement of burgerButtonElements) {
+            // Clean up any issues with the burger button
+            if (burgerButtonElement.tagName === 'A') {
+                ;
+                burgerButtonElement.href = '#';
+                burgerButtonElement.setAttribute('role', 'button');
+            }
+            burgerButtonElement.addEventListener('click', navbar_burger_toggle);
+            if (burgerButtonElement.tagName === 'A') {
+                burgerButtonElement.addEventListener('keyup', anchorElementSpaceKeyToggle);
+            }
+            burgerButtonElement.setAttribute(config.get('bulmaJS.initAttribute'), 'true');
+        }
+    }
+    /*
+     * Navbar Dropdown
+     */
+    function navbar_dropdown_show(navbarDropdownElement) {
+        navbarDropdownElement.classList.add('is-active');
+        const navbarDropdownLinkElement = navbarDropdownElement.querySelector('.navbar-link');
+        navbarDropdownLinkElement?.setAttribute('aria-expanded', 'true');
+    }
+    function navbar_dropdown_hide(navbarDropdownElement) {
+        navbarDropdownElement.classList.remove('is-active');
+        const navbarDropdownLinkElement = navbarDropdownElement.querySelector('.navbar-link');
+        navbarDropdownLinkElement?.setAttribute('aria-expanded', 'false');
+    }
+    function navbar_dropdown_toggle(clickEvent) {
+        clickEvent.preventDefault();
+        const dropdownLinkElement = clickEvent.currentTarget;
+        const dropdownElement = dropdownLinkElement.closest('.navbar-item.has-dropdown');
+        if (dropdownElement.classList.contains('is-active')) {
+            navbar_dropdown_hide(dropdownElement);
+        }
+        else {
+            navbar_dropdown_show(dropdownElement);
+        }
+    }
+    function init_navbar_dropdown(scopeElement) {
+        const dropdownLinkElements = scopeElement.querySelectorAll('.navbar-item.has-dropdown:not(.is-hoverable) > .navbar-link:not([' +
+            config.get('bulmaJS.initAttribute') +
+            '])');
+        for (const dropdownLinkElement of dropdownLinkElements) {
+            // Ensure the dropdown link is focusable
+            if (dropdownLinkElement.tagName === 'A') {
+                ;
+                dropdownLinkElement.href = '#';
+            }
+            // Set the link's role
+            dropdownLinkElement.setAttribute('role', 'menuitem');
+            // Make the popup known
+            dropdownLinkElement.setAttribute('aria-haspopup', 'true');
+            // Set the initial expanded state
+            if (dropdownLinkElement
+                .closest('.navbar-item.has-dropdown')
+                ?.classList.contains('is-active')) {
+                dropdownLinkElement.setAttribute('aria-expanded', 'true');
+            }
+            else {
+                dropdownLinkElement.setAttribute('aria-expanded', 'false');
+            }
+            // Link to the dropdown content
+            if (!dropdownLinkElement.hasAttribute('aria-controls')) {
+                const navbarDropdownId = getNewElementId();
+                dropdownLinkElement.setAttribute('aria-controls', navbarDropdownId);
+                const dropdownElement = dropdownLinkElement
+                    .closest('.navbar-item.has-dropdown')
+                    ?.querySelector('.navbar-dropdown');
+                if (dropdownElement !== null && dropdownElement !== undefined) {
+                    dropdownElement.id = navbarDropdownId;
+                }
+            }
+            // Set up the event listener
+            dropdownLinkElement.addEventListener('click', navbar_dropdown_toggle);
+            // Add support for Space key
+            if (dropdownLinkElement.tagName === 'A') {
+                dropdownLinkElement.addEventListener('keyup', anchorElementSpaceKeyToggle);
+            }
+            // Mark as initialized
+            dropdownLinkElement.setAttribute(config.get('bulmaJS.initAttribute'), 'true');
+        }
+    }
+    /*
+     * Dropdown
+     * https://bulma.io/documentation/components/dropdown/
+     */
+    function dropdown_hide(dropdownElement) {
+        dropdownElement.classList.remove('is-active');
+        const dropdownTriggerButtonElement = dropdownElement.querySelector('.dropdown-trigger button');
+        dropdownTriggerButtonElement?.setAttribute('aria-expanded', 'false');
+    }
+    function dropdown_show(dropdownElement) {
+        dropdownElement.classList.add('is-active');
+        const dropdownTriggerButtonElement = dropdownElement.querySelector('.dropdown-trigger button');
+        dropdownTriggerButtonElement?.setAttribute('aria-expanded', 'true');
+    }
+    function dropdown_toggle(clickEvent) {
+        const dropdownTriggerButtonElement = clickEvent.currentTarget;
+        const dropdownElement = dropdownTriggerButtonElement.closest('.dropdown');
+        if (dropdownElement.classList.contains('is-active')) {
+            dropdown_hide(dropdownElement);
+        }
+        else {
+            dropdown_show(dropdownElement);
+        }
+    }
+    function init_dropdown(scopeElement) {
+        const dropdownTriggerButtonElements = scopeElement.querySelectorAll('.dropdown:not(.is-hoverable) > .dropdown-trigger button:not([' +
+            config.get('bulmaJS.initAttribute') +
+            '])');
+        for (const dropdownTriggerButtonElement of dropdownTriggerButtonElements) {
+            const dropdownMenuElement = dropdownTriggerButtonElement
+                .closest('.dropdown')
+                ?.querySelector('.dropdown-menu');
+            // Make the popup known
+            dropdownTriggerButtonElement.setAttribute('aria-haspopup', 'true');
+            // Link to the dropdown content
+            if (!dropdownTriggerButtonElement.hasAttribute('aria-controls')) {
+                const dropdownMenuId = getNewElementId();
+                dropdownTriggerButtonElement.setAttribute('aria-controls', dropdownMenuId);
+                dropdownMenuElement.id = dropdownMenuId;
+            }
+            // Apply menuitem roles when a menu is used
+            if (dropdownMenuElement.getAttribute('role') === 'menu') {
+                const dropdownItemElements = dropdownMenuElement.querySelectorAll('a.dropdown-item');
+                for (const dropdownItemElement of dropdownItemElements) {
+                    dropdownItemElement.setAttribute('role', 'menuitem');
+                }
+            }
+            // Set up the event listener
+            dropdownTriggerButtonElement.addEventListener('click', dropdown_toggle);
+            // Mark as initialized
+            dropdownTriggerButtonElement.setAttribute(config.get('bulmaJS.initAttribute'), 'true');
+        }
+    }
+    /*
+     * Tabs
+     * https://bulma.io/documentation/components/tabs/
+     */
+    function tab_show(clickEvent) {
+        clickEvent.preventDefault();
+        const selectedTabAnchorElement = clickEvent.currentTarget;
+        const tabAnchorElements = selectedTabAnchorElement
+            .closest('.tabs')
+            ?.querySelectorAll("a[role='tab']") ?? [];
+        for (const tabAnchorElement of tabAnchorElements) {
+            tabAnchorElement.ariaSelected = 'false';
+            tabAnchorElement.closest('li')?.classList.remove('is-active');
+            document
+                .querySelector('#' + tabAnchorElement.getAttribute('aria-controls'))
+                ?.classList.add('is-hidden');
+        }
+        selectedTabAnchorElement.ariaSelected = 'true';
+        selectedTabAnchorElement.closest('li')?.classList.add('is-active');
+        document
+            .querySelector('#' + selectedTabAnchorElement.getAttribute('aria-controls'))
+            ?.classList.remove('is-hidden');
+    }
+    function init_tabs(scopeElement) {
+        const tabAnchorElements = scopeElement.querySelectorAll(".tabs a[href^='#']:not([" + config.get('bulmaJS.initAttribute') + '])');
+        for (const tabAnchorElement of tabAnchorElements) {
+            // Set tab roles
+            tabAnchorElement.setAttribute('role', 'tab');
+            tabAnchorElement.closest('.tabs')?.setAttribute('role', 'tablist');
+            // Initialize aria-selected
+            tabAnchorElement.ariaSelected = tabAnchorElement
+                .closest('li')
+                ?.classList.contains('is-active')
+                ? 'true'
+                : 'false';
+            // Set tabpanel role
+            const tabPanelElementId = tabAnchorElement.href.slice(Math.max(0, tabAnchorElement.href.indexOf('#') + 1));
+            const tabPanelElement = scopeElement.querySelector(`#${tabPanelElementId}`);
+            tabPanelElement?.setAttribute('role', 'tabpanel');
+            // Initialize aria-controls
+            tabAnchorElement.setAttribute('aria-controls', tabPanelElement.id);
+            // Initialize aria-labelledby
+            let tabAnchorElementId = tabAnchorElement.id;
+            if (!tabAnchorElementId || tabAnchorElementId === '') {
+                tabAnchorElementId = getNewElementId();
+                tabAnchorElement.id = tabAnchorElementId;
+            }
+            tabPanelElement?.setAttribute('aria-labelledby', tabAnchorElementId);
+            // Set up the click
+            tabAnchorElement.addEventListener('click', tab_show);
+            tabAnchorElement.setAttribute(config.get('bulmaJS.initAttribute'), 'true');
+        }
+    }
+    /*
+     * Delete button (notification, message)
+     */
+    function init_delete_button(scopeElement) {
+        const notificationDeleteElements = scopeElement.querySelectorAll('.message button.delete, .notification button.delete, .tag button.delete');
+        for (const notificationDeleteElement of notificationDeleteElements) {
+            notificationDeleteElement.addEventListener('click', () => {
+                notificationDeleteElement
+                    .closest('.message, .notification, .tag')
+                    .remove();
+            });
+        }
+    }
+    /*
+     * Alerts, Confirms
+     */
+    // eslint-disable-next-line complexity
+    function alertConfirm(confirmOptions, showCancelButton) {
+        // Save active element to shift focus back
+        const activeElement = document.activeElement;
+        /*
+         * Create modal
+         */
+        const modalElement = document.createElement('div');
+        modalElement.className = 'modal is-active';
+        modalElement.setAttribute('aria-modal', 'true');
+        // eslint-disable-next-line no-unsanitized/property
+        modalElement.innerHTML =
+            '<div class="modal-background"></div>' +
+                '<div class="modal-content" role="alertdialog">' +
+                ('<aside' +
+                    ' class="message is-' +
+                    (confirmOptions.contextualColorName ?? 'info') +
+                    '"' +
+                    ' role="alert"' +
+                    ' aria-live="assertive"' +
+                    '>' +
+                    (confirmOptions.title
+                        ? '<header class="message-header"></header>'
+                        : '') +
+                    ('<div class="message-body">' +
+                        '<div class="buttons is-justify-content-end mt-4"></div>' +
+                        '</div>') +
+                    '</aside>') +
+                '</div>';
+        if (confirmOptions.title) {
+            modalElement.querySelector('.message-header').textContent =
+                confirmOptions.title;
+        }
+        if (confirmOptions.messageIsHtml) {
+            // eslint-disable-next-line no-unsanitized/method
+            modalElement
+                .querySelector('.message-body')
+                ?.insertAdjacentHTML('afterbegin', confirmOptions.message);
+        }
+        else {
+            const paragraphElement = document.createElement('p');
+            paragraphElement.textContent = confirmOptions.message;
+            modalElement.querySelector('.message-body')?.prepend(paragraphElement);
+        }
+        /*
+         * OK Button
+         */
+        const okButtonElement = document.createElement('button');
+        okButtonElement.className =
+            'button is-' +
+                (confirmOptions.okButton?.contextualColorName ||
+                    confirmOptions.contextualColorName ||
+                    'info');
+        okButtonElement.dataset.cy = 'ok';
+        if (confirmOptions.okButton?.textIsHtml) {
+            okButtonElement.innerHTML = confirmOptions.okButton?.text ?? 'OK';
+        }
+        else {
+            okButtonElement.textContent = confirmOptions.okButton?.text ?? 'OK';
+        }
+        okButtonElement.addEventListener('click', () => {
+            modalElement.remove();
+            modal_htmlClipped_toggle();
+            activeElement.focus();
+            if (confirmOptions.okButton?.callbackFunction) {
+                confirmOptions.okButton.callbackFunction();
+            }
+        });
+        modalElement.querySelector('.buttons')?.append(okButtonElement);
+        /*
+         * Cancel Button
+         */
+        if (showCancelButton) {
+            const cancelButtonElement = document.createElement('button');
+            cancelButtonElement.className = 'button';
+            cancelButtonElement.dataset.cy = 'cancel';
+            if (confirmOptions.cancelButton?.contextualColorName) {
+                cancelButtonElement.classList.add('is-' + confirmOptions.cancelButton.contextualColorName);
+            }
+            if (confirmOptions.cancelButton?.textIsHtml) {
+                cancelButtonElement.innerHTML =
+                    confirmOptions.cancelButton?.text ?? 'Cancel';
+            }
+            else {
+                cancelButtonElement.textContent =
+                    confirmOptions.cancelButton?.text ?? 'Cancel';
+            }
+            cancelButtonElement.addEventListener('click', () => {
+                modalElement.remove();
+                modal_htmlClipped_toggle();
+                activeElement.focus();
+                if (confirmOptions.cancelButton?.callbackFunction) {
+                    confirmOptions.cancelButton.callbackFunction();
+                }
+            });
+            modalElement.querySelector('.buttons')?.prepend(cancelButtonElement);
+        }
+        /*
+         * Show the modal
+         */
+        document.body.append(modalElement);
+        modal_htmlClipped_set();
+        okButtonElement.focus();
+    }
+    function confirm(confirmOptions) {
+        alertConfirm(confirmOptions, true);
+    }
+    function alert(alertOptions) {
+        const confirmOptions = typeof alertOptions === 'string'
+            ? {
+                message: alertOptions,
+                messageIsHtml: false
+            }
+            : Object.assign({}, alertOptions);
+        alertConfirm(confirmOptions, false);
+    }
+    /*
+     * Init
+     */
+    function init(scopeElement = document) {
+        if (config.get('navbar.burger')) {
+            init_navbar_burger(scopeElement);
+        }
+        if (config.get('navbar.dropdown')) {
+            init_navbar_dropdown(scopeElement);
+        }
+        if (config.get('dropdown')) {
+            init_dropdown(scopeElement);
+        }
+        if (config.get('tabs')) {
+            init_tabs(scopeElement);
+        }
+        if (config.get('delete.button')) {
+            init_delete_button(scopeElement);
+        }
+        if (config.get('window.collapse') && !window_collapse_init) {
+            window.addEventListener('click', window_collapse);
+            window_collapse_init = true;
+        }
+    }
+    const bulmaJS = {
+        setConfig: (propertyName, propertyValue) => {
+            config[propertyName] = propertyValue;
+        },
+        init,
+        hideAllDropdowns: () => {
+            window_collapse();
+        },
+        alert,
+        confirm,
+        toggleHtmlClipped: () => {
+            modal_htmlClipped_toggle();
+        }
+    };
+    globalThis.bulmaJS = bulmaJS;
+})();
+

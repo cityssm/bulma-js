@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/naming-convention, eslint-comments/disable-enable-pair, unicorn/filename-case */
+/* eslint-disable @typescript-eslint/naming-convention, unicorn/filename-case, @eslint-community/eslint-comments/disable-enable-pair */
 
 import type {
   AlertOptions,
@@ -226,9 +226,14 @@ import type {
       if (!dropdownLinkElement.hasAttribute('aria-controls')) {
         const navbarDropdownId = getNewElementId()
         dropdownLinkElement.setAttribute('aria-controls', navbarDropdownId)
-        dropdownLinkElement
+
+        const dropdownElement = dropdownLinkElement
           .closest('.navbar-item.has-dropdown')
-          ?.querySelector('.navbar-dropdown').id = navbarDropdownId
+          ?.querySelector('.navbar-dropdown')
+
+        if (dropdownElement !== null && dropdownElement !== undefined) {
+          dropdownElement.id = navbarDropdownId
+        }
       }
 
       // Set up the event listener
@@ -434,6 +439,7 @@ import type {
    * Alerts, Confirms
    */
 
+  // eslint-disable-next-line complexity
   function alertConfirm(
     confirmOptions: ConfirmOptions,
     showCancelButton: boolean
@@ -448,6 +454,7 @@ import type {
     modalElement.className = 'modal is-active'
     modalElement.setAttribute('aria-modal', 'true')
 
+    // eslint-disable-next-line no-unsanitized/property
     modalElement.innerHTML =
       '<div class="modal-background"></div>' +
       '<div class="modal-content" role="alertdialog">' +
@@ -462,7 +469,7 @@ import type {
           ? '<header class="message-header"></header>'
           : '') +
         ('<div class="message-body">' +
-          '<div class="buttons is-block has-text-right mt-4"></div>' +
+          '<div class="buttons is-justify-content-end mt-4"></div>' +
           '</div>') +
         '</aside>') +
       '</div>'
@@ -473,6 +480,7 @@ import type {
     }
 
     if (confirmOptions.messageIsHtml) {
+      // eslint-disable-next-line no-unsanitized/method
       modalElement
         .querySelector('.message-body')
         ?.insertAdjacentHTML('afterbegin', confirmOptions.message)
@@ -616,5 +624,5 @@ import type {
     }
   }
 
-  window.bulmaJS = bulmaJS
+  globalThis.bulmaJS = bulmaJS
 })()
