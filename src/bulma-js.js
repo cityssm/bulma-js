@@ -1,9 +1,11 @@
-/* eslint-disable @typescript-eslint/naming-convention, unicorn/filename-case, @eslint-community/eslint-comments/disable-enable-pair */
-(() => {
-    /*
-     * Config
-     */
-    const config = new Map();
+"use strict";
+if (typeof window !== 'undefined' && typeof globalThis === 'undefined') {
+    ;
+    window.globalThis = window;
+}
+;
+(function () {
+    var config = new Map();
     config.set('bulmaJS.initAttribute', 'data-bulma-js-init');
     config.set('bulmaJS.elementIdPrefix', 'bulma-js-');
     config.set('navbar.burger', true);
@@ -12,9 +14,6 @@
     config.set('tabs', true);
     config.set('delete.button', true);
     config.set('window.collapse', true);
-    /*
-     * Modal Helper
-     */
     function modal_htmlClipped_set() {
         document.documentElement.classList.add('is-clipped');
     }
@@ -26,75 +25,62 @@
             document.documentElement.classList.remove('is-clipped');
         }
     }
-    /*
-     * Element ID Helper
-     */
-    let elementIdIndex = Date.now();
+    var elementIdIndex = Date.now();
     function getNewElementId() {
         elementIdIndex += 1;
-        return `bulma-js-${elementIdIndex}`;
+        return "bulma-js-".concat(elementIdIndex);
     }
-    /*
-     * "Space on Anchor" Helper
-     */
     function anchorElementSpaceKeyToggle(keyEvent) {
         if (keyEvent.key === ' ') {
             keyEvent.preventDefault();
             keyEvent.currentTarget.click();
         }
     }
-    /*
-     * Window Collapse
-     * Closes dropdowns when a click is not inside them
-     */
-    let window_collapse_init = false;
+    var window_collapse_init = false;
     function window_collapse(clickEvent) {
-        const element = clickEvent ? clickEvent.target : undefined;
-        const navbarDropdownElements = document.querySelectorAll('.navbar-item.has-dropdown.is-active');
-        for (const navbarDropdownElement of navbarDropdownElements) {
+        var element = clickEvent ? clickEvent.target : undefined;
+        var navbarDropdownElements = document.querySelectorAll('.navbar-item.has-dropdown.is-active');
+        for (var _i = 0, navbarDropdownElements_1 = navbarDropdownElements; _i < navbarDropdownElements_1.length; _i++) {
+            var navbarDropdownElement = navbarDropdownElements_1[_i];
             if (!element ||
                 (!navbarDropdownElement.contains(element) &&
                     navbarDropdownElement !== element)) {
                 navbar_dropdown_hide(navbarDropdownElement);
             }
         }
-        const dropdownElements = document.querySelectorAll('.dropdown.is-active');
-        for (const dropdownElement of dropdownElements) {
+        var dropdownElements = document.querySelectorAll('.dropdown.is-active');
+        for (var _a = 0, dropdownElements_1 = dropdownElements; _a < dropdownElements_1.length; _a++) {
+            var dropdownElement = dropdownElements_1[_a];
             if (!element ||
                 (!dropdownElement.contains(element) && dropdownElement !== element)) {
                 dropdown_hide(dropdownElement);
             }
         }
     }
-    /*
-     * Navbar Burger
-     */
     function navbar_burger_toggle(clickEvent) {
+        var _a;
         clickEvent.preventDefault();
-        const burgerButtonElement = clickEvent.currentTarget;
-        const menuElement = burgerButtonElement
-            .closest('.navbar')
-            ?.querySelector('.navbar-menu');
+        var burgerButtonElement = clickEvent.currentTarget;
+        var menuElement = (_a = burgerButtonElement
+            .closest('.navbar')) === null || _a === void 0 ? void 0 : _a.querySelector('.navbar-menu');
         if (menuElement === undefined || menuElement === null) {
             return;
         }
         if (burgerButtonElement.classList.contains('is-active')) {
-            // hide the menu
             menuElement.classList.remove('is-active');
             burgerButtonElement.classList.remove('is-active');
             burgerButtonElement.setAttribute('aria-expanded', 'false');
         }
         else {
-            // show the menu
             menuElement.classList.add('is-active');
             burgerButtonElement.classList.add('is-active');
             burgerButtonElement.setAttribute('aria-expanded', 'true');
         }
     }
     function init_navbar_burger(scopeElement) {
-        const burgerButtonElements = scopeElement.querySelectorAll('.navbar-burger:not([' + config.get('bulmaJS.initAttribute') + '])');
-        for (const burgerButtonElement of burgerButtonElements) {
-            // Clean up any issues with the burger button
+        var burgerButtonElements = scopeElement.querySelectorAll('.navbar-burger:not([' + config.get('bulmaJS.initAttribute') + '])');
+        for (var _i = 0, burgerButtonElements_1 = burgerButtonElements; _i < burgerButtonElements_1.length; _i++) {
+            var burgerButtonElement = burgerButtonElements_1[_i];
             if (burgerButtonElement.tagName === 'A') {
                 ;
                 burgerButtonElement.href = '#';
@@ -107,23 +93,20 @@
             burgerButtonElement.setAttribute(config.get('bulmaJS.initAttribute'), 'true');
         }
     }
-    /*
-     * Navbar Dropdown
-     */
     function navbar_dropdown_show(navbarDropdownElement) {
         navbarDropdownElement.classList.add('is-active');
-        const navbarDropdownLinkElement = navbarDropdownElement.querySelector('.navbar-link');
-        navbarDropdownLinkElement?.setAttribute('aria-expanded', 'true');
+        var navbarDropdownLinkElement = navbarDropdownElement.querySelector('.navbar-link');
+        navbarDropdownLinkElement === null || navbarDropdownLinkElement === void 0 ? void 0 : navbarDropdownLinkElement.setAttribute('aria-expanded', 'true');
     }
     function navbar_dropdown_hide(navbarDropdownElement) {
         navbarDropdownElement.classList.remove('is-active');
-        const navbarDropdownLinkElement = navbarDropdownElement.querySelector('.navbar-link');
-        navbarDropdownLinkElement?.setAttribute('aria-expanded', 'false');
+        var navbarDropdownLinkElement = navbarDropdownElement.querySelector('.navbar-link');
+        navbarDropdownLinkElement === null || navbarDropdownLinkElement === void 0 ? void 0 : navbarDropdownLinkElement.setAttribute('aria-expanded', 'false');
     }
     function navbar_dropdown_toggle(clickEvent) {
         clickEvent.preventDefault();
-        const dropdownLinkElement = clickEvent.currentTarget;
-        const dropdownElement = dropdownLinkElement.closest('.navbar-item.has-dropdown');
+        var dropdownLinkElement = clickEvent.currentTarget;
+        var dropdownElement = dropdownLinkElement.closest('.navbar-item.has-dropdown');
         if (dropdownElement.classList.contains('is-active')) {
             navbar_dropdown_hide(dropdownElement);
         }
@@ -132,66 +115,54 @@
         }
     }
     function init_navbar_dropdown(scopeElement) {
-        const dropdownLinkElements = scopeElement.querySelectorAll('.navbar-item.has-dropdown:not(.is-hoverable) > .navbar-link:not([' +
+        var _a, _b;
+        var dropdownLinkElements = scopeElement.querySelectorAll('.navbar-item.has-dropdown:not(.is-hoverable) > .navbar-link:not([' +
             config.get('bulmaJS.initAttribute') +
             '])');
-        for (const dropdownLinkElement of dropdownLinkElements) {
-            // Ensure the dropdown link is focusable
+        for (var _i = 0, dropdownLinkElements_1 = dropdownLinkElements; _i < dropdownLinkElements_1.length; _i++) {
+            var dropdownLinkElement = dropdownLinkElements_1[_i];
             if (dropdownLinkElement.tagName === 'A') {
                 ;
                 dropdownLinkElement.href = '#';
             }
-            // Set the link's role
             dropdownLinkElement.setAttribute('role', 'menuitem');
-            // Make the popup known
             dropdownLinkElement.setAttribute('aria-haspopup', 'true');
-            // Set the initial expanded state
-            if (dropdownLinkElement
-                .closest('.navbar-item.has-dropdown')
-                ?.classList.contains('is-active')) {
+            if ((_a = dropdownLinkElement
+                .closest('.navbar-item.has-dropdown')) === null || _a === void 0 ? void 0 : _a.classList.contains('is-active')) {
                 dropdownLinkElement.setAttribute('aria-expanded', 'true');
             }
             else {
                 dropdownLinkElement.setAttribute('aria-expanded', 'false');
             }
-            // Link to the dropdown content
             if (!dropdownLinkElement.hasAttribute('aria-controls')) {
-                const navbarDropdownId = getNewElementId();
+                var navbarDropdownId = getNewElementId();
                 dropdownLinkElement.setAttribute('aria-controls', navbarDropdownId);
-                const dropdownElement = dropdownLinkElement
-                    .closest('.navbar-item.has-dropdown')
-                    ?.querySelector('.navbar-dropdown');
+                var dropdownElement = (_b = dropdownLinkElement
+                    .closest('.navbar-item.has-dropdown')) === null || _b === void 0 ? void 0 : _b.querySelector('.navbar-dropdown');
                 if (dropdownElement !== null && dropdownElement !== undefined) {
                     dropdownElement.id = navbarDropdownId;
                 }
             }
-            // Set up the event listener
             dropdownLinkElement.addEventListener('click', navbar_dropdown_toggle);
-            // Add support for Space key
             if (dropdownLinkElement.tagName === 'A') {
                 dropdownLinkElement.addEventListener('keyup', anchorElementSpaceKeyToggle);
             }
-            // Mark as initialized
             dropdownLinkElement.setAttribute(config.get('bulmaJS.initAttribute'), 'true');
         }
     }
-    /*
-     * Dropdown
-     * https://bulma.io/documentation/components/dropdown/
-     */
     function dropdown_hide(dropdownElement) {
         dropdownElement.classList.remove('is-active');
-        const dropdownTriggerButtonElement = dropdownElement.querySelector('.dropdown-trigger button');
-        dropdownTriggerButtonElement?.setAttribute('aria-expanded', 'false');
+        var dropdownTriggerButtonElement = dropdownElement.querySelector('.dropdown-trigger button');
+        dropdownTriggerButtonElement === null || dropdownTriggerButtonElement === void 0 ? void 0 : dropdownTriggerButtonElement.setAttribute('aria-expanded', 'false');
     }
     function dropdown_show(dropdownElement) {
         dropdownElement.classList.add('is-active');
-        const dropdownTriggerButtonElement = dropdownElement.querySelector('.dropdown-trigger button');
-        dropdownTriggerButtonElement?.setAttribute('aria-expanded', 'true');
+        var dropdownTriggerButtonElement = dropdownElement.querySelector('.dropdown-trigger button');
+        dropdownTriggerButtonElement === null || dropdownTriggerButtonElement === void 0 ? void 0 : dropdownTriggerButtonElement.setAttribute('aria-expanded', 'true');
     }
     function dropdown_toggle(clickEvent) {
-        const dropdownTriggerButtonElement = clickEvent.currentTarget;
-        const dropdownElement = dropdownTriggerButtonElement.closest('.dropdown');
+        var dropdownTriggerButtonElement = clickEvent.currentTarget;
+        var dropdownElement = dropdownTriggerButtonElement.closest('.dropdown');
         if (dropdownElement.classList.contains('is-active')) {
             dropdown_hide(dropdownElement);
         }
@@ -200,120 +171,100 @@
         }
     }
     function init_dropdown(scopeElement) {
-        const dropdownTriggerButtonElements = scopeElement.querySelectorAll('.dropdown:not(.is-hoverable) > .dropdown-trigger button:not([' +
+        var _a;
+        var dropdownTriggerButtonElements = scopeElement.querySelectorAll('.dropdown:not(.is-hoverable) > .dropdown-trigger button:not([' +
             config.get('bulmaJS.initAttribute') +
             '])');
-        for (const dropdownTriggerButtonElement of dropdownTriggerButtonElements) {
-            const dropdownMenuElement = dropdownTriggerButtonElement
-                .closest('.dropdown')
-                ?.querySelector('.dropdown-menu');
-            // Make the popup known
+        for (var _i = 0, dropdownTriggerButtonElements_1 = dropdownTriggerButtonElements; _i < dropdownTriggerButtonElements_1.length; _i++) {
+            var dropdownTriggerButtonElement = dropdownTriggerButtonElements_1[_i];
+            var dropdownMenuElement = (_a = dropdownTriggerButtonElement
+                .closest('.dropdown')) === null || _a === void 0 ? void 0 : _a.querySelector('.dropdown-menu');
             dropdownTriggerButtonElement.setAttribute('aria-haspopup', 'true');
-            // Link to the dropdown content
             if (!dropdownTriggerButtonElement.hasAttribute('aria-controls')) {
-                const dropdownMenuId = getNewElementId();
+                var dropdownMenuId = getNewElementId();
                 dropdownTriggerButtonElement.setAttribute('aria-controls', dropdownMenuId);
                 dropdownMenuElement.id = dropdownMenuId;
             }
-            // Apply menuitem roles when a menu is used
             if (dropdownMenuElement.getAttribute('role') === 'menu') {
-                const dropdownItemElements = dropdownMenuElement.querySelectorAll('a.dropdown-item');
-                for (const dropdownItemElement of dropdownItemElements) {
+                var dropdownItemElements = dropdownMenuElement.querySelectorAll('a.dropdown-item');
+                for (var _b = 0, dropdownItemElements_1 = dropdownItemElements; _b < dropdownItemElements_1.length; _b++) {
+                    var dropdownItemElement = dropdownItemElements_1[_b];
                     dropdownItemElement.setAttribute('role', 'menuitem');
                 }
             }
-            // Set up the event listener
             dropdownTriggerButtonElement.addEventListener('click', dropdown_toggle);
-            // Mark as initialized
             dropdownTriggerButtonElement.setAttribute(config.get('bulmaJS.initAttribute'), 'true');
         }
     }
-    /*
-     * Tabs
-     * https://bulma.io/documentation/components/tabs/
-     */
     function tab_show(clickEvent) {
+        var _a, _b, _c, _d, _e, _f;
         clickEvent.preventDefault();
-        const selectedTabAnchorElement = clickEvent.currentTarget;
-        const tabAnchorElements = selectedTabAnchorElement
-            .closest('.tabs')
-            ?.querySelectorAll("a[role='tab']") ?? [];
-        for (const tabAnchorElement of tabAnchorElements) {
+        var selectedTabAnchorElement = clickEvent.currentTarget;
+        var tabAnchorElements = (_b = (_a = selectedTabAnchorElement
+            .closest('.tabs')) === null || _a === void 0 ? void 0 : _a.querySelectorAll("a[role='tab']")) !== null && _b !== void 0 ? _b : [];
+        for (var _i = 0, tabAnchorElements_1 = tabAnchorElements; _i < tabAnchorElements_1.length; _i++) {
+            var tabAnchorElement = tabAnchorElements_1[_i];
             tabAnchorElement.ariaSelected = 'false';
-            tabAnchorElement.closest('li')?.classList.remove('is-active');
-            document
-                .querySelector('#' + tabAnchorElement.getAttribute('aria-controls'))
-                ?.classList.add('is-hidden');
+            (_c = tabAnchorElement.closest('li')) === null || _c === void 0 ? void 0 : _c.classList.remove('is-active');
+            (_d = document
+                .querySelector('#' + tabAnchorElement.getAttribute('aria-controls'))) === null || _d === void 0 ? void 0 : _d.classList.add('is-hidden');
         }
         selectedTabAnchorElement.ariaSelected = 'true';
-        selectedTabAnchorElement.closest('li')?.classList.add('is-active');
-        document
-            .querySelector('#' + selectedTabAnchorElement.getAttribute('aria-controls'))
-            ?.classList.remove('is-hidden');
+        (_e = selectedTabAnchorElement.closest('li')) === null || _e === void 0 ? void 0 : _e.classList.add('is-active');
+        (_f = document
+            .querySelector('#' + selectedTabAnchorElement.getAttribute('aria-controls'))) === null || _f === void 0 ? void 0 : _f.classList.remove('is-hidden');
     }
     function init_tabs(scopeElement) {
-        const tabAnchorElements = scopeElement.querySelectorAll(".tabs a[href^='#']:not([" + config.get('bulmaJS.initAttribute') + '])');
-        for (const tabAnchorElement of tabAnchorElements) {
-            // Set tab roles
+        var _a, _b;
+        var tabAnchorElements = scopeElement.querySelectorAll(".tabs a[href^='#']:not([" + config.get('bulmaJS.initAttribute') + '])');
+        for (var _i = 0, tabAnchorElements_2 = tabAnchorElements; _i < tabAnchorElements_2.length; _i++) {
+            var tabAnchorElement = tabAnchorElements_2[_i];
             tabAnchorElement.setAttribute('role', 'tab');
-            tabAnchorElement.closest('.tabs')?.setAttribute('role', 'tablist');
-            // Initialize aria-selected
-            tabAnchorElement.ariaSelected = tabAnchorElement
-                .closest('li')
-                ?.classList.contains('is-active')
+            (_a = tabAnchorElement.closest('.tabs')) === null || _a === void 0 ? void 0 : _a.setAttribute('role', 'tablist');
+            tabAnchorElement.ariaSelected = ((_b = tabAnchorElement
+                .closest('li')) === null || _b === void 0 ? void 0 : _b.classList.contains('is-active'))
                 ? 'true'
                 : 'false';
-            // Set tabpanel role
-            const tabPanelElementId = tabAnchorElement.href.slice(Math.max(0, tabAnchorElement.href.indexOf('#') + 1));
-            const tabPanelElement = scopeElement.querySelector(`#${tabPanelElementId}`);
-            tabPanelElement?.setAttribute('role', 'tabpanel');
-            // Initialize aria-controls
+            var tabPanelElementId = tabAnchorElement.href.slice(Math.max(0, tabAnchorElement.href.indexOf('#') + 1));
+            var tabPanelElement = scopeElement.querySelector("#".concat(tabPanelElementId));
+            tabPanelElement === null || tabPanelElement === void 0 ? void 0 : tabPanelElement.setAttribute('role', 'tabpanel');
             tabAnchorElement.setAttribute('aria-controls', tabPanelElement.id);
-            // Initialize aria-labelledby
-            let tabAnchorElementId = tabAnchorElement.id;
+            var tabAnchorElementId = tabAnchorElement.id;
             if (!tabAnchorElementId || tabAnchorElementId === '') {
                 tabAnchorElementId = getNewElementId();
                 tabAnchorElement.id = tabAnchorElementId;
             }
-            tabPanelElement?.setAttribute('aria-labelledby', tabAnchorElementId);
-            // Set up the click
+            tabPanelElement === null || tabPanelElement === void 0 ? void 0 : tabPanelElement.setAttribute('aria-labelledby', tabAnchorElementId);
             tabAnchorElement.addEventListener('click', tab_show);
             tabAnchorElement.setAttribute(config.get('bulmaJS.initAttribute'), 'true');
         }
     }
-    /*
-     * Delete button (notification, message)
-     */
     function init_delete_button(scopeElement) {
-        const notificationDeleteElements = scopeElement.querySelectorAll('.message button.delete, .notification button.delete, .tag button.delete');
-        for (const notificationDeleteElement of notificationDeleteElements) {
-            notificationDeleteElement.addEventListener('click', () => {
+        var notificationDeleteElements = scopeElement.querySelectorAll('.message button.delete, .notification button.delete, .tag button.delete');
+        var _loop_1 = function (notificationDeleteElement) {
+            notificationDeleteElement.addEventListener('click', function () {
                 notificationDeleteElement
                     .closest('.message, .notification, .tag')
                     .remove();
             });
+        };
+        for (var _i = 0, notificationDeleteElements_1 = notificationDeleteElements; _i < notificationDeleteElements_1.length; _i++) {
+            var notificationDeleteElement = notificationDeleteElements_1[_i];
+            _loop_1(notificationDeleteElement);
         }
     }
-    /*
-     * Alerts, Confirms
-     */
-    // eslint-disable-next-line complexity
     function alertConfirm(confirmOptions, showCancelButton) {
-        // Save active element to shift focus back
-        const activeElement = document.activeElement;
-        /*
-         * Create modal
-         */
-        const modalElement = document.createElement('div');
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s;
+        var activeElement = document.activeElement;
+        var modalElement = document.createElement('div');
         modalElement.className = 'modal is-active';
         modalElement.setAttribute('aria-modal', 'true');
-        // eslint-disable-next-line no-unsanitized/property
         modalElement.innerHTML =
             '<div class="modal-background"></div>' +
                 '<div class="modal-content" role="alertdialog">' +
                 ('<aside' +
                     ' class="message is-' +
-                    (confirmOptions.contextualColorName ?? 'info') +
+                    ((_a = confirmOptions.contextualColorName) !== null && _a !== void 0 ? _a : 'info') +
                     '"' +
                     ' role="alert"' +
                     ' aria-live="assertive"' +
@@ -331,72 +282,63 @@
                 confirmOptions.title;
         }
         if (confirmOptions.messageIsHtml) {
-            // eslint-disable-next-line no-unsanitized/method
-            modalElement
-                .querySelector('.message-body')
-                ?.insertAdjacentHTML('afterbegin', confirmOptions.message);
+            (_b = modalElement
+                .querySelector('.message-body')) === null || _b === void 0 ? void 0 : _b.insertAdjacentHTML('afterbegin', confirmOptions.message);
         }
         else {
-            const paragraphElement = document.createElement('p');
+            var paragraphElement = document.createElement('p');
             paragraphElement.textContent = confirmOptions.message;
-            modalElement.querySelector('.message-body')?.prepend(paragraphElement);
+            (_c = modalElement.querySelector('.message-body')) === null || _c === void 0 ? void 0 : _c.prepend(paragraphElement);
         }
-        /*
-         * OK Button
-         */
-        const okButtonElement = document.createElement('button');
+        var okButtonElement = document.createElement('button');
         okButtonElement.className =
             'button is-' +
-                (confirmOptions.okButton?.contextualColorName ||
+                (((_d = confirmOptions.okButton) === null || _d === void 0 ? void 0 : _d.contextualColorName) ||
                     confirmOptions.contextualColorName ||
                     'info');
         okButtonElement.dataset.cy = 'ok';
-        if (confirmOptions.okButton?.textIsHtml) {
-            okButtonElement.innerHTML = confirmOptions.okButton?.text ?? 'OK';
+        if ((_e = confirmOptions.okButton) === null || _e === void 0 ? void 0 : _e.textIsHtml) {
+            okButtonElement.innerHTML = (_g = (_f = confirmOptions.okButton) === null || _f === void 0 ? void 0 : _f.text) !== null && _g !== void 0 ? _g : 'OK';
         }
         else {
-            okButtonElement.textContent = confirmOptions.okButton?.text ?? 'OK';
+            okButtonElement.textContent = (_j = (_h = confirmOptions.okButton) === null || _h === void 0 ? void 0 : _h.text) !== null && _j !== void 0 ? _j : 'OK';
         }
-        okButtonElement.addEventListener('click', () => {
+        okButtonElement.addEventListener('click', function () {
+            var _a;
             modalElement.remove();
             modal_htmlClipped_toggle();
             activeElement.focus();
-            if (confirmOptions.okButton?.callbackFunction) {
+            if ((_a = confirmOptions.okButton) === null || _a === void 0 ? void 0 : _a.callbackFunction) {
                 confirmOptions.okButton.callbackFunction();
             }
         });
-        modalElement.querySelector('.buttons')?.append(okButtonElement);
-        /*
-         * Cancel Button
-         */
+        (_k = modalElement.querySelector('.buttons')) === null || _k === void 0 ? void 0 : _k.append(okButtonElement);
         if (showCancelButton) {
-            const cancelButtonElement = document.createElement('button');
+            var cancelButtonElement = document.createElement('button');
             cancelButtonElement.className = 'button';
             cancelButtonElement.dataset.cy = 'cancel';
-            if (confirmOptions.cancelButton?.contextualColorName) {
+            if ((_l = confirmOptions.cancelButton) === null || _l === void 0 ? void 0 : _l.contextualColorName) {
                 cancelButtonElement.classList.add('is-' + confirmOptions.cancelButton.contextualColorName);
             }
-            if (confirmOptions.cancelButton?.textIsHtml) {
+            if ((_m = confirmOptions.cancelButton) === null || _m === void 0 ? void 0 : _m.textIsHtml) {
                 cancelButtonElement.innerHTML =
-                    confirmOptions.cancelButton?.text ?? 'Cancel';
+                    (_p = (_o = confirmOptions.cancelButton) === null || _o === void 0 ? void 0 : _o.text) !== null && _p !== void 0 ? _p : 'Cancel';
             }
             else {
                 cancelButtonElement.textContent =
-                    confirmOptions.cancelButton?.text ?? 'Cancel';
+                    (_r = (_q = confirmOptions.cancelButton) === null || _q === void 0 ? void 0 : _q.text) !== null && _r !== void 0 ? _r : 'Cancel';
             }
-            cancelButtonElement.addEventListener('click', () => {
+            cancelButtonElement.addEventListener('click', function () {
+                var _a;
                 modalElement.remove();
                 modal_htmlClipped_toggle();
                 activeElement.focus();
-                if (confirmOptions.cancelButton?.callbackFunction) {
+                if ((_a = confirmOptions.cancelButton) === null || _a === void 0 ? void 0 : _a.callbackFunction) {
                     confirmOptions.cancelButton.callbackFunction();
                 }
             });
-            modalElement.querySelector('.buttons')?.prepend(cancelButtonElement);
+            (_s = modalElement.querySelector('.buttons')) === null || _s === void 0 ? void 0 : _s.prepend(cancelButtonElement);
         }
-        /*
-         * Show the modal
-         */
         document.body.append(modalElement);
         modal_htmlClipped_set();
         okButtonElement.focus();
@@ -405,7 +347,7 @@
         alertConfirm(confirmOptions, true);
     }
     function alert(alertOptions) {
-        const confirmOptions = typeof alertOptions === 'string'
+        var confirmOptions = typeof alertOptions === 'string'
             ? {
                 message: alertOptions,
                 messageIsHtml: false
@@ -413,10 +355,8 @@
             : Object.assign({}, alertOptions);
         alertConfirm(confirmOptions, false);
     }
-    /*
-     * Init
-     */
-    function init(scopeElement = document) {
+    function init(scopeElement) {
+        if (scopeElement === void 0) { scopeElement = document; }
         if (config.get('navbar.burger')) {
             init_navbar_burger(scopeElement);
         }
@@ -437,20 +377,19 @@
             window_collapse_init = true;
         }
     }
-    const bulmaJS = {
-        setConfig: (propertyName, propertyValue) => {
+    var bulmaJS = {
+        setConfig: function (propertyName, propertyValue) {
             config[propertyName] = propertyValue;
         },
-        init,
-        hideAllDropdowns: () => {
+        init: init,
+        hideAllDropdowns: function () {
             window_collapse();
         },
-        alert,
-        confirm,
-        toggleHtmlClipped: () => {
+        alert: alert,
+        confirm: confirm,
+        toggleHtmlClipped: function () {
             modal_htmlClipped_toggle();
         }
     };
     globalThis.bulmaJS = bulmaJS;
 })();
-export {};

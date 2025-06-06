@@ -6,6 +6,13 @@ import type {
   ConfigProperties,
   ConfirmOptions
 } from '../types.js'
+
+// eslint-disable-next-line unicorn/prefer-global-this
+if (typeof window !== 'undefined' && typeof globalThis === 'undefined') {
+  // eslint-disable-next-line unicorn/prefer-global-this, @typescript-eslint/no-explicit-any
+  ;(window as any).globalThis = window
+}
+
 ;(() => {
   /*
    * Config
