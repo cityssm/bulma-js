@@ -1,6 +1,6 @@
 {
   "name": "@cityssm/bulma-js",
-  "version": "1.0.0-rc.1",
+  "version": "1.0.0-rc.2",
   "description": "The unofficial missing JavaScript library for Bulma websites",
   "type": "module",
   "exports": {
