@@ -35,8 +35,8 @@
   "homepage": "https://github.com/cityssm/bulma-js#readme",
   "devDependencies": {
     "@types/gulp": "^4.0.17",
-    "eslint-config-cityssm": "^20.0.0",
-    "gulp": "^5.0.0",
+    "eslint-config-cityssm": "^27.1.0",
+    "gulp": "^5.0.1",
     "gulp-replace": "^1.1.4",
     "prettier-config-cityssm": "^1.0.0"
   }

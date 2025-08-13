@@ -9,6 +9,7 @@ function sourceCleanFunction(): NodeJS.ReadWriteStream {
   return gulp
     .src('src/*.js', { allowEmpty: true })
     .pipe(replace('export {};', ''))
+    .pipe(replace('Object.defineProperty(exports, "__esModule", { value: true });', ''))
     .pipe(gulp.dest('dist'))
 }
 

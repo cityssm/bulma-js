@@ -1,11 +1,12 @@
 "use strict";
+
 if (typeof window !== 'undefined' && typeof globalThis === 'undefined') {
     ;
     window.globalThis = window;
 }
 ;
-(function () {
-    var config = new Map();
+(() => {
+    const config = new Map();
     config.set('bulmaJS.initAttribute', 'data-bulma-js-init');
     config.set('bulmaJS.elementIdPrefix', 'bulma-js-');
     config.set('navbar.burger', true);
@@ -25,10 +26,10 @@ if (typeof window !== 'undefined' && typeof globalThis === 'undefined') {
             document.documentElement.classList.remove('is-clipped');
         }
     }
-    var elementIdIndex = Date.now();
+    let elementIdIndex = Date.now();
     function getNewElementId() {
         elementIdIndex += 1;
-        return "bulma-js-".concat(elementIdIndex);
+        return `bulma-js-${elementIdIndex}`;
     }
     function anchorElementSpaceKeyToggle(keyEvent) {
         if (keyEvent.key === ' ') {
@@ -36,21 +37,19 @@ if (typeof window !== 'undefined' && typeof globalThis === 'undefined') {
             keyEvent.currentTarget.click();
         }
     }
-    var window_collapse_init = false;
+    let window_collapse_init = false;
     function window_collapse(clickEvent) {
-        var element = clickEvent ? clickEvent.target : undefined;
-        var navbarDropdownElements = document.querySelectorAll('.navbar-item.has-dropdown.is-active');
-        for (var _i = 0, navbarDropdownElements_1 = navbarDropdownElements; _i < navbarDropdownElements_1.length; _i++) {
-            var navbarDropdownElement = navbarDropdownElements_1[_i];
+        const element = clickEvent ? clickEvent.target : undefined;
+        const navbarDropdownElements = document.querySelectorAll('.navbar-item.has-dropdown.is-active');
+        for (const navbarDropdownElement of navbarDropdownElements) {
             if (!element ||
                 (!navbarDropdownElement.contains(element) &&
                     navbarDropdownElement !== element)) {
                 navbar_dropdown_hide(navbarDropdownElement);
             }
         }
-        var dropdownElements = document.querySelectorAll('.dropdown.is-active');
-        for (var _a = 0, dropdownElements_1 = dropdownElements; _a < dropdownElements_1.length; _a++) {
-            var dropdownElement = dropdownElements_1[_a];
+        const dropdownElements = document.querySelectorAll('.dropdown.is-active');
+        for (const dropdownElement of dropdownElements) {
             if (!element ||
                 (!dropdownElement.contains(element) && dropdownElement !== element)) {
                 dropdown_hide(dropdownElement);
@@ -60,8 +59,8 @@ if (typeof window !== 'undefined' && typeof globalThis === 'undefined') {
     function navbar_burger_toggle(clickEvent) {
         var _a;
         clickEvent.preventDefault();
-        var burgerButtonElement = clickEvent.currentTarget;
-        var menuElement = (_a = burgerButtonElement
+        const burgerButtonElement = clickEvent.currentTarget;
+        const menuElement = (_a = burgerButtonElement
             .closest('.navbar')) === null || _a === void 0 ? void 0 : _a.querySelector('.navbar-menu');
         if (menuElement === undefined || menuElement === null) {
             return;
@@ -78,9 +77,8 @@ if (typeof window !== 'undefined' && typeof globalThis === 'undefined') {
         }
     }
     function init_navbar_burger(scopeElement) {
-        var burgerButtonElements = scopeElement.querySelectorAll('.navbar-burger:not([' + config.get('bulmaJS.initAttribute') + '])');
-        for (var _i = 0, burgerButtonElements_1 = burgerButtonElements; _i < burgerButtonElements_1.length; _i++) {
-            var burgerButtonElement = burgerButtonElements_1[_i];
+        const burgerButtonElements = scopeElement.querySelectorAll('.navbar-burger:not([' + config.get('bulmaJS.initAttribute') + '])');
+        for (const burgerButtonElement of burgerButtonElements) {
             if (burgerButtonElement.tagName === 'A') {
                 ;
                 burgerButtonElement.href = '#';
@@ -95,18 +93,18 @@ if (typeof window !== 'undefined' && typeof globalThis === 'undefined') {
     }
     function navbar_dropdown_show(navbarDropdownElement) {
         navbarDropdownElement.classList.add('is-active');
-        var navbarDropdownLinkElement = navbarDropdownElement.querySelector('.navbar-link');
+        const navbarDropdownLinkElement = navbarDropdownElement.querySelector('.navbar-link');
         navbarDropdownLinkElement === null || navbarDropdownLinkElement === void 0 ? void 0 : navbarDropdownLinkElement.setAttribute('aria-expanded', 'true');
     }
     function navbar_dropdown_hide(navbarDropdownElement) {
         navbarDropdownElement.classList.remove('is-active');
-        var navbarDropdownLinkElement = navbarDropdownElement.querySelector('.navbar-link');
+        const navbarDropdownLinkElement = navbarDropdownElement.querySelector('.navbar-link');
         navbarDropdownLinkElement === null || navbarDropdownLinkElement === void 0 ? void 0 : navbarDropdownLinkElement.setAttribute('aria-expanded', 'false');
     }
     function navbar_dropdown_toggle(clickEvent) {
         clickEvent.preventDefault();
-        var dropdownLinkElement = clickEvent.currentTarget;
-        var dropdownElement = dropdownLinkElement.closest('.navbar-item.has-dropdown');
+        const dropdownLinkElement = clickEvent.currentTarget;
+        const dropdownElement = dropdownLinkElement.closest('.navbar-item.has-dropdown');
         if (dropdownElement.classList.contains('is-active')) {
             navbar_dropdown_hide(dropdownElement);
         }
@@ -116,11 +114,10 @@ if (typeof window !== 'undefined' && typeof globalThis === 'undefined') {
     }
     function init_navbar_dropdown(scopeElement) {
         var _a, _b;
-        var dropdownLinkElements = scopeElement.querySelectorAll('.navbar-item.has-dropdown:not(.is-hoverable) > .navbar-link:not([' +
+        const dropdownLinkElements = scopeElement.querySelectorAll('.navbar-item.has-dropdown:not(.is-hoverable) > .navbar-link:not([' +
             config.get('bulmaJS.initAttribute') +
             '])');
-        for (var _i = 0, dropdownLinkElements_1 = dropdownLinkElements; _i < dropdownLinkElements_1.length; _i++) {
-            var dropdownLinkElement = dropdownLinkElements_1[_i];
+        for (const dropdownLinkElement of dropdownLinkElements) {
             if (dropdownLinkElement.tagName === 'A') {
                 ;
                 dropdownLinkElement.href = '#';
@@ -135,9 +132,9 @@ if (typeof window !== 'undefined' && typeof globalThis === 'undefined') {
                 dropdownLinkElement.setAttribute('aria-expanded', 'false');
             }
             if (!dropdownLinkElement.hasAttribute('aria-controls')) {
-                var navbarDropdownId = getNewElementId();
+                const navbarDropdownId = getNewElementId();
                 dropdownLinkElement.setAttribute('aria-controls', navbarDropdownId);
-                var dropdownElement = (_b = dropdownLinkElement
+                const dropdownElement = (_b = dropdownLinkElement
                     .closest('.navbar-item.has-dropdown')) === null || _b === void 0 ? void 0 : _b.querySelector('.navbar-dropdown');
                 if (dropdownElement !== null && dropdownElement !== undefined) {
                     dropdownElement.id = navbarDropdownId;
@@ -152,17 +149,17 @@ if (typeof window !== 'undefined' && typeof globalThis === 'undefined') {
     }
     function dropdown_hide(dropdownElement) {
         dropdownElement.classList.remove('is-active');
-        var dropdownTriggerButtonElement = dropdownElement.querySelector('.dropdown-trigger button');
+        const dropdownTriggerButtonElement = dropdownElement.querySelector('.dropdown-trigger button');
         dropdownTriggerButtonElement === null || dropdownTriggerButtonElement === void 0 ? void 0 : dropdownTriggerButtonElement.setAttribute('aria-expanded', 'false');
     }
     function dropdown_show(dropdownElement) {
         dropdownElement.classList.add('is-active');
-        var dropdownTriggerButtonElement = dropdownElement.querySelector('.dropdown-trigger button');
+        const dropdownTriggerButtonElement = dropdownElement.querySelector('.dropdown-trigger button');
         dropdownTriggerButtonElement === null || dropdownTriggerButtonElement === void 0 ? void 0 : dropdownTriggerButtonElement.setAttribute('aria-expanded', 'true');
     }
     function dropdown_toggle(clickEvent) {
-        var dropdownTriggerButtonElement = clickEvent.currentTarget;
-        var dropdownElement = dropdownTriggerButtonElement.closest('.dropdown');
+        const dropdownTriggerButtonElement = clickEvent.currentTarget;
+        const dropdownElement = dropdownTriggerButtonElement.closest('.dropdown');
         if (dropdownElement.classList.contains('is-active')) {
             dropdown_hide(dropdownElement);
         }
@@ -172,23 +169,21 @@ if (typeof window !== 'undefined' && typeof globalThis === 'undefined') {
     }
     function init_dropdown(scopeElement) {
         var _a;
-        var dropdownTriggerButtonElements = scopeElement.querySelectorAll('.dropdown:not(.is-hoverable) > .dropdown-trigger button:not([' +
+        const dropdownTriggerButtonElements = scopeElement.querySelectorAll('.dropdown:not(.is-hoverable) > .dropdown-trigger button:not([' +
             config.get('bulmaJS.initAttribute') +
             '])');
-        for (var _i = 0, dropdownTriggerButtonElements_1 = dropdownTriggerButtonElements; _i < dropdownTriggerButtonElements_1.length; _i++) {
-            var dropdownTriggerButtonElement = dropdownTriggerButtonElements_1[_i];
-            var dropdownMenuElement = (_a = dropdownTriggerButtonElement
+        for (const dropdownTriggerButtonElement of dropdownTriggerButtonElements) {
+            const dropdownMenuElement = (_a = dropdownTriggerButtonElement
                 .closest('.dropdown')) === null || _a === void 0 ? void 0 : _a.querySelector('.dropdown-menu');
             dropdownTriggerButtonElement.setAttribute('aria-haspopup', 'true');
             if (!dropdownTriggerButtonElement.hasAttribute('aria-controls')) {
-                var dropdownMenuId = getNewElementId();
+                const dropdownMenuId = getNewElementId();
                 dropdownTriggerButtonElement.setAttribute('aria-controls', dropdownMenuId);
                 dropdownMenuElement.id = dropdownMenuId;
             }
             if (dropdownMenuElement.getAttribute('role') === 'menu') {
-                var dropdownItemElements = dropdownMenuElement.querySelectorAll('a.dropdown-item');
-                for (var _b = 0, dropdownItemElements_1 = dropdownItemElements; _b < dropdownItemElements_1.length; _b++) {
-                    var dropdownItemElement = dropdownItemElements_1[_b];
+                const dropdownItemElements = dropdownMenuElement.querySelectorAll('a.dropdown-item');
+                for (const dropdownItemElement of dropdownItemElements) {
                     dropdownItemElement.setAttribute('role', 'menuitem');
                 }
             }
@@ -199,11 +194,10 @@ if (typeof window !== 'undefined' && typeof globalThis === 'undefined') {
     function tab_show(clickEvent) {
         var _a, _b, _c, _d, _e, _f;
         clickEvent.preventDefault();
-        var selectedTabAnchorElement = clickEvent.currentTarget;
-        var tabAnchorElements = (_b = (_a = selectedTabAnchorElement
+        const selectedTabAnchorElement = clickEvent.currentTarget;
+        const tabAnchorElements = (_b = (_a = selectedTabAnchorElement
             .closest('.tabs')) === null || _a === void 0 ? void 0 : _a.querySelectorAll("a[role='tab']")) !== null && _b !== void 0 ? _b : [];
-        for (var _i = 0, tabAnchorElements_1 = tabAnchorElements; _i < tabAnchorElements_1.length; _i++) {
-            var tabAnchorElement = tabAnchorElements_1[_i];
+        for (const tabAnchorElement of tabAnchorElements) {
             tabAnchorElement.ariaSelected = 'false';
             (_c = tabAnchorElement.closest('li')) === null || _c === void 0 ? void 0 : _c.classList.remove('is-active');
             (_d = document
@@ -216,20 +210,19 @@ if (typeof window !== 'undefined' && typeof globalThis === 'undefined') {
     }
     function init_tabs(scopeElement) {
         var _a, _b;
-        var tabAnchorElements = scopeElement.querySelectorAll(".tabs a[href^='#']:not([" + config.get('bulmaJS.initAttribute') + '])');
-        for (var _i = 0, tabAnchorElements_2 = tabAnchorElements; _i < tabAnchorElements_2.length; _i++) {
-            var tabAnchorElement = tabAnchorElements_2[_i];
+        const tabAnchorElements = scopeElement.querySelectorAll(".tabs a[href^='#']:not([" + config.get('bulmaJS.initAttribute') + '])');
+        for (const tabAnchorElement of tabAnchorElements) {
             tabAnchorElement.setAttribute('role', 'tab');
             (_a = tabAnchorElement.closest('.tabs')) === null || _a === void 0 ? void 0 : _a.setAttribute('role', 'tablist');
             tabAnchorElement.ariaSelected = ((_b = tabAnchorElement
                 .closest('li')) === null || _b === void 0 ? void 0 : _b.classList.contains('is-active'))
                 ? 'true'
                 : 'false';
-            var tabPanelElementId = tabAnchorElement.href.slice(Math.max(0, tabAnchorElement.href.indexOf('#') + 1));
-            var tabPanelElement = scopeElement.querySelector("#".concat(tabPanelElementId));
+            const tabPanelElementId = tabAnchorElement.href.slice(Math.max(0, tabAnchorElement.href.indexOf('#') + 1));
+            const tabPanelElement = scopeElement.querySelector(`#${tabPanelElementId}`);
             tabPanelElement === null || tabPanelElement === void 0 ? void 0 : tabPanelElement.setAttribute('role', 'tabpanel');
             tabAnchorElement.setAttribute('aria-controls', tabPanelElement.id);
-            var tabAnchorElementId = tabAnchorElement.id;
+            let tabAnchorElementId = tabAnchorElement.id;
             if (!tabAnchorElementId || tabAnchorElementId === '') {
                 tabAnchorElementId = getNewElementId();
                 tabAnchorElement.id = tabAnchorElementId;
@@ -240,70 +233,68 @@ if (typeof window !== 'undefined' && typeof globalThis === 'undefined') {
         }
     }
     function init_delete_button(scopeElement) {
-        var notificationDeleteElements = scopeElement.querySelectorAll('.message button.delete, .notification button.delete, .tag button.delete');
-        var _loop_1 = function (notificationDeleteElement) {
-            notificationDeleteElement.addEventListener('click', function () {
+        const notificationDeleteElements = scopeElement.querySelectorAll('.message button.delete, .notification button.delete, .tag button.delete');
+        for (const notificationDeleteElement of notificationDeleteElements) {
+            notificationDeleteElement.addEventListener('click', () => {
                 notificationDeleteElement
                     .closest('.message, .notification, .tag')
                     .remove();
             });
-        };
-        for (var _i = 0, notificationDeleteElements_1 = notificationDeleteElements; _i < notificationDeleteElements_1.length; _i++) {
-            var notificationDeleteElement = notificationDeleteElements_1[_i];
-            _loop_1(notificationDeleteElement);
         }
     }
     function alertConfirm(confirmOptions, showCancelButton) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s;
-        var activeElement = document.activeElement;
-        var modalElement = document.createElement('div');
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t;
+        const activeElement = document.activeElement;
+        const modalElement = document.createElement('div');
         modalElement.className = 'modal is-active';
-        modalElement.setAttribute('aria-modal', 'true');
+        const messageHeaderId = getNewElementId();
         modalElement.innerHTML =
             '<div class="modal-background"></div>' +
                 '<div class="modal-content" role="alertdialog">' +
-                ('<aside' +
-                    ' class="message is-' +
-                    ((_a = confirmOptions.contextualColorName) !== null && _a !== void 0 ? _a : 'info') +
-                    '"' +
-                    ' role="alert"' +
-                    ' aria-live="assertive"' +
-                    '>' +
-                    (confirmOptions.title
-                        ? '<header class="message-header"></header>'
-                        : '') +
-                    ('<div class="message-body">' +
-                        '<div class="buttons is-justify-content-end mt-4"></div>' +
-                        '</div>') +
-                    '</aside>') +
+                '<aside' +
+                ' class="message is-' +
+                ((_a = confirmOptions.contextualColorName) !== null && _a !== void 0 ? _a : 'info') +
+                '"' +
+                ' role="alert"' +
+                ' aria-live="assertive"' +
+                '>' +
+                (confirmOptions.title
+                    ? `<header class="message-header" id="${messageHeaderId}"></header>`
+                    : '') +
+                '<div class="message-body">' +
+                '<div class="buttons is-justify-content-end mt-4"></div>' +
+                '</div>' +
+                '</aside>' +
                 '</div>';
         if (confirmOptions.title) {
-            modalElement.querySelector('.message-header').textContent =
-                confirmOptions.title;
+            ;
+            modalElement.querySelector('.message-header').textContent = confirmOptions.title;
+            (_b = modalElement
+                .querySelector('.modal-content')) === null || _b === void 0 ? void 0 : _b.setAttribute('aria-labelledby', messageHeaderId);
         }
         if (confirmOptions.messageIsHtml) {
-            (_b = modalElement
-                .querySelector('.message-body')) === null || _b === void 0 ? void 0 : _b.insertAdjacentHTML('afterbegin', confirmOptions.message);
+            (_c = modalElement
+                .querySelector('.message-body')) === null || _c === void 0 ? void 0 : _c.insertAdjacentHTML('afterbegin', confirmOptions.message);
         }
         else {
-            var paragraphElement = document.createElement('p');
+            const paragraphElement = document.createElement('p');
             paragraphElement.textContent = confirmOptions.message;
-            (_c = modalElement.querySelector('.message-body')) === null || _c === void 0 ? void 0 : _c.prepend(paragraphElement);
+            (_d = modalElement.querySelector('.message-body')) === null || _d === void 0 ? void 0 : _d.prepend(paragraphElement);
         }
-        var okButtonElement = document.createElement('button');
+        const okButtonElement = document.createElement('button');
         okButtonElement.className =
             'button is-' +
-                (((_d = confirmOptions.okButton) === null || _d === void 0 ? void 0 : _d.contextualColorName) ||
+                (((_e = confirmOptions.okButton) === null || _e === void 0 ? void 0 : _e.contextualColorName) ||
                     confirmOptions.contextualColorName ||
                     'info');
         okButtonElement.dataset.cy = 'ok';
-        if ((_e = confirmOptions.okButton) === null || _e === void 0 ? void 0 : _e.textIsHtml) {
-            okButtonElement.innerHTML = (_g = (_f = confirmOptions.okButton) === null || _f === void 0 ? void 0 : _f.text) !== null && _g !== void 0 ? _g : 'OK';
+        if ((_f = confirmOptions.okButton) === null || _f === void 0 ? void 0 : _f.textIsHtml) {
+            okButtonElement.innerHTML = (_h = (_g = confirmOptions.okButton) === null || _g === void 0 ? void 0 : _g.text) !== null && _h !== void 0 ? _h : 'OK';
         }
         else {
-            okButtonElement.textContent = (_j = (_h = confirmOptions.okButton) === null || _h === void 0 ? void 0 : _h.text) !== null && _j !== void 0 ? _j : 'OK';
+            okButtonElement.textContent = (_k = (_j = confirmOptions.okButton) === null || _j === void 0 ? void 0 : _j.text) !== null && _k !== void 0 ? _k : 'OK';
         }
-        okButtonElement.addEventListener('click', function () {
+        okButtonElement.addEventListener('click', () => {
             var _a;
             modalElement.remove();
             modal_htmlClipped_toggle();
@@ -312,23 +303,23 @@ if (typeof window !== 'undefined' && typeof globalThis === 'undefined') {
                 confirmOptions.okButton.callbackFunction();
             }
         });
-        (_k = modalElement.querySelector('.buttons')) === null || _k === void 0 ? void 0 : _k.append(okButtonElement);
+        (_l = modalElement.querySelector('.buttons')) === null || _l === void 0 ? void 0 : _l.append(okButtonElement);
         if (showCancelButton) {
-            var cancelButtonElement = document.createElement('button');
+            const cancelButtonElement = document.createElement('button');
             cancelButtonElement.className = 'button';
             cancelButtonElement.dataset.cy = 'cancel';
-            if ((_l = confirmOptions.cancelButton) === null || _l === void 0 ? void 0 : _l.contextualColorName) {
+            if ((_m = confirmOptions.cancelButton) === null || _m === void 0 ? void 0 : _m.contextualColorName) {
                 cancelButtonElement.classList.add('is-' + confirmOptions.cancelButton.contextualColorName);
             }
-            if ((_m = confirmOptions.cancelButton) === null || _m === void 0 ? void 0 : _m.textIsHtml) {
+            if ((_o = confirmOptions.cancelButton) === null || _o === void 0 ? void 0 : _o.textIsHtml) {
                 cancelButtonElement.innerHTML =
-                    (_p = (_o = confirmOptions.cancelButton) === null || _o === void 0 ? void 0 : _o.text) !== null && _p !== void 0 ? _p : 'Cancel';
+                    (_q = (_p = confirmOptions.cancelButton) === null || _p === void 0 ? void 0 : _p.text) !== null && _q !== void 0 ? _q : 'Cancel';
             }
             else {
                 cancelButtonElement.textContent =
-                    (_r = (_q = confirmOptions.cancelButton) === null || _q === void 0 ? void 0 : _q.text) !== null && _r !== void 0 ? _r : 'Cancel';
+                    (_s = (_r = confirmOptions.cancelButton) === null || _r === void 0 ? void 0 : _r.text) !== null && _s !== void 0 ? _s : 'Cancel';
             }
-            cancelButtonElement.addEventListener('click', function () {
+            cancelButtonElement.addEventListener('click', () => {
                 var _a;
                 modalElement.remove();
                 modal_htmlClipped_toggle();
@@ -337,7 +328,7 @@ if (typeof window !== 'undefined' && typeof globalThis === 'undefined') {
                     confirmOptions.cancelButton.callbackFunction();
                 }
             });
-            (_s = modalElement.querySelector('.buttons')) === null || _s === void 0 ? void 0 : _s.prepend(cancelButtonElement);
+            (_t = modalElement.querySelector('.buttons')) === null || _t === void 0 ? void 0 : _t.prepend(cancelButtonElement);
         }
         document.body.append(modalElement);
         modal_htmlClipped_set();
@@ -347,7 +338,7 @@ if (typeof window !== 'undefined' && typeof globalThis === 'undefined') {
         alertConfirm(confirmOptions, true);
     }
     function alert(alertOptions) {
-        var confirmOptions = typeof alertOptions === 'string'
+        const confirmOptions = typeof alertOptions === 'string'
             ? {
                 message: alertOptions,
                 messageIsHtml: false
@@ -355,8 +346,7 @@ if (typeof window !== 'undefined' && typeof globalThis === 'undefined') {
             : Object.assign({}, alertOptions);
         alertConfirm(confirmOptions, false);
     }
-    function init(scopeElement) {
-        if (scopeElement === void 0) { scopeElement = document; }
+    function init(scopeElement = document) {
         if (config.get('navbar.burger')) {
             init_navbar_burger(scopeElement);
         }
@@ -377,17 +367,17 @@ if (typeof window !== 'undefined' && typeof globalThis === 'undefined') {
             window_collapse_init = true;
         }
     }
-    var bulmaJS = {
-        setConfig: function (propertyName, propertyValue) {
+    const bulmaJS = {
+        setConfig: (propertyName, propertyValue) => {
             config[propertyName] = propertyValue;
         },
-        init: init,
-        hideAllDropdowns: function () {
+        init,
+        hideAllDropdowns: () => {
             window_collapse();
         },
-        alert: alert,
-        confirm: confirm,
-        toggleHtmlClipped: function () {
+        alert,
+        confirm,
+        toggleHtmlClipped: () => {
             modal_htmlClipped_toggle();
         }
     };

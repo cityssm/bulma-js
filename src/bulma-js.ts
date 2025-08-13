@@ -204,7 +204,7 @@ if (typeof window !== 'undefined' && typeof globalThis === 'undefined') {
       '.navbar-item.has-dropdown:not(.is-hoverable) > .navbar-link:not([' +
         config.get('bulmaJS.initAttribute') +
         '])'
-    ) as NodeListOf<HTMLElement>
+    )
 
     for (const dropdownLinkElement of dropdownLinkElements) {
       // Ensure the dropdown link is focusable
@@ -459,31 +459,37 @@ if (typeof window !== 'undefined' && typeof globalThis === 'undefined') {
      */
     const modalElement = document.createElement('div')
     modalElement.className = 'modal is-active'
-    modalElement.setAttribute('aria-modal', 'true')
+
+    const messageHeaderId = getNewElementId()
 
     // eslint-disable-next-line no-unsanitized/property
     modalElement.innerHTML =
       '<div class="modal-background"></div>' +
       '<div class="modal-content" role="alertdialog">' +
-      ('<aside' +
-        ' class="message is-' +
-        (confirmOptions.contextualColorName ?? 'info') +
-        '"' +
-        ' role="alert"' +
-        ' aria-live="assertive"' +
-        '>' +
-        (confirmOptions.title
-          ? '<header class="message-header"></header>'
-          : '') +
-        ('<div class="message-body">' +
-          '<div class="buttons is-justify-content-end mt-4"></div>' +
-          '</div>') +
-        '</aside>') +
+      '<aside' +
+      ' class="message is-' +
+      (confirmOptions.contextualColorName ?? 'info') +
+      '"' +
+      ' role="alert"' +
+      ' aria-live="assertive"' +
+      '>' +
+      (confirmOptions.title
+        ? `<header class="message-header" id="${messageHeaderId}"></header>`
+        : '') +
+      '<div class="message-body">' +
+      '<div class="buttons is-justify-content-end mt-4"></div>' +
+      '</div>' +
+      '</aside>' +
       '</div>'
 
     if (confirmOptions.title) {
-      modalElement.querySelector('.message-header').textContent =
-        confirmOptions.title
+      ;(
+        modalElement.querySelector('.message-header') as HTMLElement
+      ).textContent = confirmOptions.title
+
+      modalElement
+        .querySelector('.modal-content')
+        ?.setAttribute('aria-labelledby', messageHeaderId)
     }
 
     if (confirmOptions.messageIsHtml) {
