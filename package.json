@@ -1,22 +1,7 @@
 {
   "name": "@cityssm/bulma-js",
-  "version": "1.0.0-rc.2",
+  "version": "1.0.0-rc.3",
   "description": "The unofficial missing JavaScript library for Bulma websites",
-  "type": "module",
-  "exports": {
-    ".": "./dist/bulma-js.js",
-    "./types.js": "./types.js"
-  },
-  "engines": {
-    "node": ">=18.0.0"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/cityssm/bulma-js.git"
-  },
   "keywords": [
     "aria",
     "bulma",
@@ -27,17 +12,32 @@
     "alert",
     "confirm"
   ],
-  "author": "The Corporation of the City of Sault Ste. Marie",
-  "license": "MIT",
+  "homepage": "https://github.com/cityssm/bulma-js#readme",
   "bugs": {
     "url": "https://github.com/cityssm/bulma-js/issues"
   },
-  "homepage": "https://github.com/cityssm/bulma-js#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cityssm/bulma-js.git"
+  },
+  "license": "MIT",
+  "author": "The Corporation of the City of Sault Ste. Marie",
+  "type": "module",
+  "exports": {
+    ".": "./dist/bulma-js.js",
+    "./types.js": "./types.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "devDependencies": {
     "@types/gulp": "^4.0.17",
     "eslint-config-cityssm": "^27.1.0",
     "gulp": "^5.0.1",
     "gulp-replace": "^1.1.4",
     "prettier-config-cityssm": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
