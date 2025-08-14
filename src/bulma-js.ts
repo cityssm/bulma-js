@@ -463,24 +463,19 @@ if (typeof window !== 'undefined' && typeof globalThis === 'undefined') {
     const messageHeaderId = getNewElementId()
 
     // eslint-disable-next-line no-unsanitized/property
-    modalElement.innerHTML =
-      '<div class="modal-background"></div>' +
-      '<div class="modal-content" role="alertdialog">' +
-      '<aside' +
-      ' class="message is-' +
-      (confirmOptions.contextualColorName ?? 'info') +
-      '"' +
-      ' role="alert"' +
-      ' aria-live="assertive"' +
-      '>' +
-      (confirmOptions.title
-        ? `<header class="message-header" id="${messageHeaderId}"></header>`
-        : '') +
-      '<div class="message-body">' +
-      '<div class="buttons is-justify-content-end mt-4"></div>' +
-      '</div>' +
-      '</aside>' +
-      '</div>'
+    modalElement.innerHTML = `<div class="modal-background"></div>
+        <div class="modal-content" role="alertdialog" aria-live="assertive">
+          <aside class="message is-${confirmOptions.contextualColorName ?? 'info'}">
+            ${
+              confirmOptions.title
+                ? `<header class="message-header" id="${messageHeaderId}"></header>`
+                : ''
+            }
+            <div class="message-body">
+              <div class="buttons is-justify-content-end mt-4"></div>
+            </div>
+          </aside>
+        </div>`
 
     if (confirmOptions.title) {
       ;(
