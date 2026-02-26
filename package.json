@@ -30,6 +30,7 @@
   },
   "files": [
     "dist",
+    "src/bulma-js.*",
     "types.*"
   ],
   "scripts": {
