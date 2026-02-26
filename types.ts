@@ -1,23 +1,23 @@
 export type BooleanConfigProperties =
+  | 'delete.button'
+  | 'dropdown'
   | 'navbar.burger'
   | 'navbar.dropdown'
-  | 'dropdown'
   | 'tabs'
-  | 'delete.button'
   | 'window.collapse'
 
 export type StringConfigProperties =
-  | 'bulmaJS.initAttribute'
   | 'bulmaJS.elementIdPrefix'
+  | 'bulmaJS.initAttribute'
 
 export type BulmaContextualColors =
+  | 'danger'
   | 'dark'
-  | 'primary'
-  | 'link'
   | 'info'
+  | 'link'
+  | 'primary'
   | 'success'
   | 'warning'
-  | 'danger'
 
 export type ConfigProperties = BooleanConfigProperties | StringConfigProperties
 
@@ -47,7 +47,7 @@ export interface BulmaJS {
   ) => void
   init: (scopeElement?: Document | HTMLElement) => void
   hideAllDropdowns: () => void
-  alert: (alertOptions: string | AlertOptions) => void
+  alert: (alertOptions: AlertOptions | string) => void
   confirm: (confirmOptions: ConfirmOptions) => void
   toggleHtmlClipped: () => void
 }

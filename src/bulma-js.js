@@ -6,15 +6,16 @@ if (typeof window !== 'undefined' && typeof globalThis === 'undefined') {
 }
 ;
 (() => {
-    const config = new Map();
-    config.set('bulmaJS.initAttribute', 'data-bulma-js-init');
-    config.set('bulmaJS.elementIdPrefix', 'bulma-js-');
-    config.set('navbar.burger', true);
-    config.set('navbar.dropdown', true);
-    config.set('dropdown', true);
-    config.set('tabs', true);
-    config.set('delete.button', true);
-    config.set('window.collapse', true);
+    const config = new Map([
+        ['bulmaJS.elementIdPrefix', 'bulma-js-'],
+        ['bulmaJS.initAttribute', 'data-bulma-js-init'],
+        ['delete.button', true],
+        ['dropdown', true],
+        ['navbar.burger', true],
+        ['navbar.dropdown', true],
+        ['tabs', true],
+        ['window.collapse', true]
+    ]);
     function modal_htmlClipped_set() {
         document.documentElement.classList.add('is-clipped');
     }
@@ -77,7 +78,7 @@ if (typeof window !== 'undefined' && typeof globalThis === 'undefined') {
         }
     }
     function init_navbar_burger(scopeElement) {
-        const burgerButtonElements = scopeElement.querySelectorAll('.navbar-burger:not([' + config.get('bulmaJS.initAttribute') + '])');
+        const burgerButtonElements = scopeElement.querySelectorAll(`.navbar-burger:not([${config.get('bulmaJS.initAttribute')}])`);
         for (const burgerButtonElement of burgerButtonElements) {
             if (burgerButtonElement.tagName === 'A') {
                 ;
@@ -114,9 +115,7 @@ if (typeof window !== 'undefined' && typeof globalThis === 'undefined') {
     }
     function init_navbar_dropdown(scopeElement) {
         var _a, _b;
-        const dropdownLinkElements = scopeElement.querySelectorAll('.navbar-item.has-dropdown:not(.is-hoverable) > .navbar-link:not([' +
-            config.get('bulmaJS.initAttribute') +
-            '])');
+        const dropdownLinkElements = scopeElement.querySelectorAll(`.navbar-item.has-dropdown:not(.is-hoverable) > .navbar-link:not([${config.get('bulmaJS.initAttribute')}])`);
         for (const dropdownLinkElement of dropdownLinkElements) {
             if (dropdownLinkElement.tagName === 'A') {
                 ;
@@ -169,9 +168,7 @@ if (typeof window !== 'undefined' && typeof globalThis === 'undefined') {
     }
     function init_dropdown(scopeElement) {
         var _a;
-        const dropdownTriggerButtonElements = scopeElement.querySelectorAll('.dropdown:not(.is-hoverable) > .dropdown-trigger button:not([' +
-            config.get('bulmaJS.initAttribute') +
-            '])');
+        const dropdownTriggerButtonElements = scopeElement.querySelectorAll(`.dropdown:not(.is-hoverable) > .dropdown-trigger button:not([${config.get('bulmaJS.initAttribute')}])`);
         for (const dropdownTriggerButtonElement of dropdownTriggerButtonElements) {
             const dropdownMenuElement = (_a = dropdownTriggerButtonElement
                 .closest('.dropdown')) === null || _a === void 0 ? void 0 : _a.querySelector('.dropdown-menu');
@@ -201,16 +198,16 @@ if (typeof window !== 'undefined' && typeof globalThis === 'undefined') {
             tabAnchorElement.ariaSelected = 'false';
             (_c = tabAnchorElement.closest('li')) === null || _c === void 0 ? void 0 : _c.classList.remove('is-active');
             (_d = document
-                .querySelector('#' + tabAnchorElement.getAttribute('aria-controls'))) === null || _d === void 0 ? void 0 : _d.classList.add('is-hidden');
+                .querySelector(`#${tabAnchorElement.getAttribute('aria-controls')}`)) === null || _d === void 0 ? void 0 : _d.classList.add('is-hidden');
         }
         selectedTabAnchorElement.ariaSelected = 'true';
         (_e = selectedTabAnchorElement.closest('li')) === null || _e === void 0 ? void 0 : _e.classList.add('is-active');
         (_f = document
-            .querySelector('#' + selectedTabAnchorElement.getAttribute('aria-controls'))) === null || _f === void 0 ? void 0 : _f.classList.remove('is-hidden');
+            .querySelector(`#${selectedTabAnchorElement.getAttribute('aria-controls')}`)) === null || _f === void 0 ? void 0 : _f.classList.remove('is-hidden');
     }
     function init_tabs(scopeElement) {
         var _a, _b;
-        const tabAnchorElements = scopeElement.querySelectorAll(".tabs a[href^='#']:not([" + config.get('bulmaJS.initAttribute') + '])');
+        const tabAnchorElements = scopeElement.querySelectorAll(`.tabs a[href^='#']:not([${config.get('bulmaJS.initAttribute')}])`);
         for (const tabAnchorElement of tabAnchorElements) {
             tabAnchorElement.setAttribute('role', 'tab');
             (_a = tabAnchorElement.closest('.tabs')) === null || _a === void 0 ? void 0 : _a.setAttribute('role', 'tablist');
@@ -243,58 +240,58 @@ if (typeof window !== 'undefined' && typeof globalThis === 'undefined') {
         }
     }
     function alertConfirm(confirmOptions, showCancelButton) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s;
         const activeElement = document.activeElement;
         const modalElement = document.createElement('div');
         modalElement.className = 'modal is-active';
         const messageHeaderId = getNewElementId();
-        modalElement.innerHTML = `<div class="modal-background"></div>
-        <div class="modal-content" role="alertdialog" aria-live="assertive">
-          <aside class="message is-${(_a = confirmOptions.contextualColorName) !== null && _a !== void 0 ? _a : 'info'}">
-            ${confirmOptions.title
+        const messageBodyId = getNewElementId();
+        modalElement.innerHTML = `
+      <div class="modal-background"></div>
+      <div
+        class="modal-content"
+        role="alertdialog"
+        aria-live="assertive"
+        aria-labelledby="${confirmOptions.title ? messageHeaderId : messageBodyId}"
+      >
+        <aside class="message is-${(_a = confirmOptions.contextualColorName) !== null && _a !== void 0 ? _a : 'info'}">
+          ${confirmOptions.title
             ? `<header class="message-header" id="${messageHeaderId}"></header>`
             : ''}
-            <div class="message-body">
-              <div class="buttons is-justify-content-end mt-4"></div>
-            </div>
-          </aside>
-        </div>`;
+          <div class="message-body" id="${messageBodyId}">
+            <div class="buttons is-justify-content-end mt-4"></div>
+          </div>
+        </aside>
+      </div>
+    `;
         if (confirmOptions.title) {
             ;
             modalElement.querySelector('.message-header').textContent = confirmOptions.title;
-            (_b = modalElement
-                .querySelector('.modal-content')) === null || _b === void 0 ? void 0 : _b.setAttribute('aria-labelledby', messageHeaderId);
         }
         if (confirmOptions.messageIsHtml) {
-            (_c = modalElement
-                .querySelector('.message-body')) === null || _c === void 0 ? void 0 : _c.insertAdjacentHTML('afterbegin', confirmOptions.message);
+            (_b = modalElement
+                .querySelector('.message-body')) === null || _b === void 0 ? void 0 : _b.insertAdjacentHTML('afterbegin', confirmOptions.message);
         }
         else {
             const paragraphElement = document.createElement('p');
             paragraphElement.textContent = confirmOptions.message;
-            (_d = modalElement.querySelector('.message-body')) === null || _d === void 0 ? void 0 : _d.prepend(paragraphElement);
+            (_c = modalElement.querySelector('.message-body')) === null || _c === void 0 ? void 0 : _c.prepend(paragraphElement);
         }
         const okButtonElement = document.createElement('button');
-        okButtonElement.className =
-            'button is-' +
-                (((_e = confirmOptions.okButton) === null || _e === void 0 ? void 0 : _e.contextualColorName) ||
-                    confirmOptions.contextualColorName ||
-                    'info');
+        okButtonElement.className = `button is-${(_f = (_e = (_d = confirmOptions.okButton) === null || _d === void 0 ? void 0 : _d.contextualColorName) !== null && _e !== void 0 ? _e : confirmOptions.contextualColorName) !== null && _f !== void 0 ? _f : 'info'}`;
         okButtonElement.dataset.cy = 'ok';
-        if ((_f = confirmOptions.okButton) === null || _f === void 0 ? void 0 : _f.textIsHtml) {
-            okButtonElement.innerHTML = (_h = (_g = confirmOptions.okButton) === null || _g === void 0 ? void 0 : _g.text) !== null && _h !== void 0 ? _h : 'OK';
+        if ((_g = confirmOptions.okButton) === null || _g === void 0 ? void 0 : _g.textIsHtml) {
+            okButtonElement.innerHTML = (_h = confirmOptions.okButton.text) !== null && _h !== void 0 ? _h : 'OK';
         }
         else {
             okButtonElement.textContent = (_k = (_j = confirmOptions.okButton) === null || _j === void 0 ? void 0 : _j.text) !== null && _k !== void 0 ? _k : 'OK';
         }
         okButtonElement.addEventListener('click', () => {
-            var _a;
+            var _a, _b;
             modalElement.remove();
             modal_htmlClipped_toggle();
             activeElement.focus();
-            if ((_a = confirmOptions.okButton) === null || _a === void 0 ? void 0 : _a.callbackFunction) {
-                confirmOptions.okButton.callbackFunction();
-            }
+            (_b = (_a = confirmOptions.okButton) === null || _a === void 0 ? void 0 : _a.callbackFunction) === null || _b === void 0 ? void 0 : _b.call(_a);
         });
         (_l = modalElement.querySelector('.buttons')) === null || _l === void 0 ? void 0 : _l.append(okButtonElement);
         if (showCancelButton) {
@@ -302,15 +299,15 @@ if (typeof window !== 'undefined' && typeof globalThis === 'undefined') {
             cancelButtonElement.className = 'button';
             cancelButtonElement.dataset.cy = 'cancel';
             if ((_m = confirmOptions.cancelButton) === null || _m === void 0 ? void 0 : _m.contextualColorName) {
-                cancelButtonElement.classList.add('is-' + confirmOptions.cancelButton.contextualColorName);
+                cancelButtonElement.classList.add(`is-${confirmOptions.cancelButton.contextualColorName}`);
             }
             if ((_o = confirmOptions.cancelButton) === null || _o === void 0 ? void 0 : _o.textIsHtml) {
                 cancelButtonElement.innerHTML =
-                    (_q = (_p = confirmOptions.cancelButton) === null || _p === void 0 ? void 0 : _p.text) !== null && _q !== void 0 ? _q : 'Cancel';
+                    (_p = confirmOptions.cancelButton.text) !== null && _p !== void 0 ? _p : 'Cancel';
             }
             else {
                 cancelButtonElement.textContent =
-                    (_s = (_r = confirmOptions.cancelButton) === null || _r === void 0 ? void 0 : _r.text) !== null && _s !== void 0 ? _s : 'Cancel';
+                    (_r = (_q = confirmOptions.cancelButton) === null || _q === void 0 ? void 0 : _q.text) !== null && _r !== void 0 ? _r : 'Cancel';
             }
             cancelButtonElement.addEventListener('click', () => {
                 var _a;
@@ -321,7 +318,7 @@ if (typeof window !== 'undefined' && typeof globalThis === 'undefined') {
                     confirmOptions.cancelButton.callbackFunction();
                 }
             });
-            (_t = modalElement.querySelector('.buttons')) === null || _t === void 0 ? void 0 : _t.prepend(cancelButtonElement);
+            (_s = modalElement.querySelector('.buttons')) === null || _s === void 0 ? void 0 : _s.prepend(cancelButtonElement);
         }
         document.body.append(modalElement);
         modal_htmlClipped_set();

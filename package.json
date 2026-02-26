@@ -1,6 +1,6 @@
 {
   "name": "@cityssm/bulma-js",
-  "version": "1.0.0-rc.3",
+  "version": "1.0.0-rc.4",
   "description": "The unofficial missing JavaScript library for Bulma websites",
   "keywords": [
     "aria",
@@ -22,20 +22,25 @@
   },
   "license": "MIT",
   "author": "The Corporation of the City of Sault Ste. Marie",
+  "sideEffects": false,
   "type": "module",
   "exports": {
     ".": "./dist/bulma-js.js",
     "./types.js": "./types.js"
   },
+  "files": [
+    "dist",
+    "types.*"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "@types/gulp": "^4.0.17",
-    "eslint-config-cityssm": "^27.1.0",
+    "@types/gulp": "^4.0.18",
+    "eslint-config-cityssm": "^38.3.1",
     "gulp": "^5.0.1",
     "gulp-replace": "^1.1.4",
-    "prettier-config-cityssm": "^1.0.0"
+    "prettier-config-cityssm": "^2.1.1"
   },
   "engines": {
     "node": ">=18.0.0"

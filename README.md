@@ -1,7 +1,6 @@
 # bulma-js
 
 [![Codacy grade](https://img.shields.io/codacy/grade/a9a609f6824b4c61be84701ec8402d48)](https://app.codacy.com/gh/cityssm/bulma-js/dashboard)
-[![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/cityssm/bulma-js)](https://codeclimate.com/github/cityssm/bulma-js)
 
 [![Made with Bulma](https://bulma.io/images/made-with-bulma.png)](https://bulma.io)
 

@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/naming-convention, unicorn/filename-case, @eslint-community/eslint-comments/disable-enable-pair */
+/* eslint-disable @typescript-eslint/naming-convention, unicorn/filename-case */
 
 import type {
   AlertOptions,
@@ -18,16 +18,16 @@ if (typeof window !== 'undefined' && typeof globalThis === 'undefined') {
    * Config
    */
 
-  const config = new Map<ConfigProperties, boolean | string>()
-
-  config.set('bulmaJS.initAttribute', 'data-bulma-js-init')
-  config.set('bulmaJS.elementIdPrefix', 'bulma-js-')
-  config.set('navbar.burger', true)
-  config.set('navbar.dropdown', true)
-  config.set('dropdown', true)
-  config.set('tabs', true)
-  config.set('delete.button', true)
-  config.set('window.collapse', true)
+  const config = new Map<ConfigProperties, boolean | string>([
+    ['bulmaJS.elementIdPrefix', 'bulma-js-'],
+    ['bulmaJS.initAttribute', 'data-bulma-js-init'],
+    ['delete.button', true],
+    ['dropdown', true],
+    ['navbar.burger', true],
+    ['navbar.dropdown', true],
+    ['tabs', true],
+    ['window.collapse', true]
+  ])
 
   /*
    * Modal Helper
@@ -137,7 +137,7 @@ if (typeof window !== 'undefined' && typeof globalThis === 'undefined') {
 
   function init_navbar_burger(scopeElement: Document | HTMLElement): void {
     const burgerButtonElements = scopeElement.querySelectorAll(
-      '.navbar-burger:not([' + config.get('bulmaJS.initAttribute') + '])'
+      `.navbar-burger:not([${config.get('bulmaJS.initAttribute')}])`
     ) as NodeListOf<HTMLElement>
 
     for (const burgerButtonElement of burgerButtonElements) {
@@ -201,10 +201,10 @@ if (typeof window !== 'undefined' && typeof globalThis === 'undefined') {
 
   function init_navbar_dropdown(scopeElement: Document | HTMLElement): void {
     const dropdownLinkElements = scopeElement.querySelectorAll(
-      '.navbar-item.has-dropdown:not(.is-hoverable) > .navbar-link:not([' +
-        config.get('bulmaJS.initAttribute') +
-        '])'
-    )
+      `.navbar-item.has-dropdown:not(.is-hoverable) > .navbar-link:not([${config.get(
+        'bulmaJS.initAttribute'
+      )}])`
+    ) as NodeListOf<HTMLElement>
 
     for (const dropdownLinkElement of dropdownLinkElements) {
       // Ensure the dropdown link is focusable
@@ -300,9 +300,9 @@ if (typeof window !== 'undefined' && typeof globalThis === 'undefined') {
 
   function init_dropdown(scopeElement: Document | HTMLElement): void {
     const dropdownTriggerButtonElements = scopeElement.querySelectorAll(
-      '.dropdown:not(.is-hoverable) > .dropdown-trigger button:not([' +
-        config.get('bulmaJS.initAttribute') +
-        '])'
+      `.dropdown:not(.is-hoverable) > .dropdown-trigger button:not([${config.get(
+        'bulmaJS.initAttribute'
+      )}])`
     )
 
     for (const dropdownTriggerButtonElement of dropdownTriggerButtonElements) {
@@ -364,7 +364,7 @@ if (typeof window !== 'undefined' && typeof globalThis === 'undefined') {
       tabAnchorElement.ariaSelected = 'false'
       tabAnchorElement.closest('li')?.classList.remove('is-active')
       document
-        .querySelector('#' + tabAnchorElement.getAttribute('aria-controls'))
+        .querySelector(`#${tabAnchorElement.getAttribute('aria-controls')}`)
         ?.classList.add('is-hidden')
     }
 
@@ -372,14 +372,14 @@ if (typeof window !== 'undefined' && typeof globalThis === 'undefined') {
     selectedTabAnchorElement.closest('li')?.classList.add('is-active')
     document
       .querySelector(
-        '#' + selectedTabAnchorElement.getAttribute('aria-controls')
+        `#${selectedTabAnchorElement.getAttribute('aria-controls')}`
       )
       ?.classList.remove('is-hidden')
   }
 
   function init_tabs(scopeElement: Document | HTMLElement): void {
     const tabAnchorElements = scopeElement.querySelectorAll(
-      ".tabs a[href^='#']:not([" + config.get('bulmaJS.initAttribute') + '])'
+      `.tabs a[href^='#']:not([${config.get('bulmaJS.initAttribute')}])`
     ) as NodeListOf<HTMLAnchorElement>
 
     for (const tabAnchorElement of tabAnchorElements) {
@@ -461,30 +461,34 @@ if (typeof window !== 'undefined' && typeof globalThis === 'undefined') {
     modalElement.className = 'modal is-active'
 
     const messageHeaderId = getNewElementId()
+    const messageBodyId = getNewElementId()
 
     // eslint-disable-next-line no-unsanitized/property
-    modalElement.innerHTML = `<div class="modal-background"></div>
-        <div class="modal-content" role="alertdialog" aria-live="assertive">
-          <aside class="message is-${confirmOptions.contextualColorName ?? 'info'}">
-            ${
-              confirmOptions.title
-                ? `<header class="message-header" id="${messageHeaderId}"></header>`
-                : ''
-            }
-            <div class="message-body">
-              <div class="buttons is-justify-content-end mt-4"></div>
-            </div>
-          </aside>
-        </div>`
+    modalElement.innerHTML = /* html */ `
+      <div class="modal-background"></div>
+      <div
+        class="modal-content"
+        role="alertdialog"
+        aria-live="assertive"
+        aria-labelledby="${confirmOptions.title ? messageHeaderId : messageBodyId}"
+      >
+        <aside class="message is-${confirmOptions.contextualColorName ?? 'info'}">
+          ${
+            confirmOptions.title
+              ? `<header class="message-header" id="${messageHeaderId}"></header>`
+              : ''
+          }
+          <div class="message-body" id="${messageBodyId}">
+            <div class="buttons is-justify-content-end mt-4"></div>
+          </div>
+        </aside>
+      </div>
+    `
 
     if (confirmOptions.title) {
       ;(
         modalElement.querySelector('.message-header') as HTMLElement
       ).textContent = confirmOptions.title
-
-      modalElement
-        .querySelector('.modal-content')
-        ?.setAttribute('aria-labelledby', messageHeaderId)
     }
 
     if (confirmOptions.messageIsHtml) {
@@ -502,15 +506,16 @@ if (typeof window !== 'undefined' && typeof globalThis === 'undefined') {
      * OK Button
      */
     const okButtonElement = document.createElement('button')
-    okButtonElement.className =
-      'button is-' +
-      (confirmOptions.okButton?.contextualColorName ||
-        confirmOptions.contextualColorName ||
-        'info')
+    okButtonElement.className = `button is-${
+      confirmOptions.okButton?.contextualColorName ??
+      confirmOptions.contextualColorName ??
+      'info'
+    }`
     okButtonElement.dataset.cy = 'ok'
 
     if (confirmOptions.okButton?.textIsHtml) {
-      okButtonElement.innerHTML = confirmOptions.okButton?.text ?? 'OK'
+      // eslint-disable-next-line no-unsanitized/property
+      okButtonElement.innerHTML = confirmOptions.okButton.text ?? 'OK'
     } else {
       okButtonElement.textContent = confirmOptions.okButton?.text ?? 'OK'
     }
@@ -520,9 +525,7 @@ if (typeof window !== 'undefined' && typeof globalThis === 'undefined') {
       modal_htmlClipped_toggle()
       activeElement.focus()
 
-      if (confirmOptions.okButton?.callbackFunction) {
-        confirmOptions.okButton.callbackFunction()
-      }
+      confirmOptions.okButton?.callbackFunction?.()
     })
 
     modalElement.querySelector('.buttons')?.append(okButtonElement)
@@ -537,13 +540,14 @@ if (typeof window !== 'undefined' && typeof globalThis === 'undefined') {
 
       if (confirmOptions.cancelButton?.contextualColorName) {
         cancelButtonElement.classList.add(
-          'is-' + confirmOptions.cancelButton.contextualColorName
+          `is-${confirmOptions.cancelButton.contextualColorName}`
         )
       }
 
       if (confirmOptions.cancelButton?.textIsHtml) {
+        // eslint-disable-next-line no-unsanitized/property
         cancelButtonElement.innerHTML =
-          confirmOptions.cancelButton?.text ?? 'Cancel'
+          confirmOptions.cancelButton.text ?? 'Cancel'
       } else {
         cancelButtonElement.textContent =
           confirmOptions.cancelButton?.text ?? 'Cancel'
@@ -574,14 +578,14 @@ if (typeof window !== 'undefined' && typeof globalThis === 'undefined') {
     alertConfirm(confirmOptions, true)
   }
 
-  function alert(alertOptions: string | AlertOptions): void {
+  function alert(alertOptions: AlertOptions | string): void {
     const confirmOptions: ConfirmOptions =
       typeof alertOptions === 'string'
         ? {
             message: alertOptions,
             messageIsHtml: false
           }
-        : Object.assign({}, alertOptions)
+        : { ...alertOptions }
 
     alertConfirm(confirmOptions, false)
   }
